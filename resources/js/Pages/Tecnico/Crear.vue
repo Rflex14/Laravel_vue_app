@@ -10,10 +10,10 @@ import { useForm } from '@inertiajs/vue3'
 import Form from '@/Components/Tecnico/Form.vue'
  
 const form = useForm ({
-  cedula: 0,
+  cedula: '',
   nombre: '',
   apellido: '',
-  telefono: 0
+  telefono: ''
 })
 </script>
 

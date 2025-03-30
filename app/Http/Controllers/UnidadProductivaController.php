@@ -6,7 +6,6 @@ use App\Models\Persona;
 use App\Models\Empresa;
 use App\Models\Producto;
 use App\Models\Unidad_Productiva;
-use App\Models\UnidadProductivaProducto;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use App\Http\Requests\UnidadProductivaRequest;
@@ -20,7 +19,8 @@ class UnidadProductivaController extends Controller
      */
     public function index()
     {
-      $unidades_productivas = Unidad_Productiva::paginate(self::NUMERO_DE_OBJETOS_POR_PAGINA);
+      $unidades_productivas = Unidad_Productiva::with('productos', 'persona', 'empresa')->paginate(self::NUMERO_DE_OBJETOS_POR_PAGINA);
+      //dd($unidades_productivas);
       return inertia('Unidad_Productiva/Index', props: ['unidades_productivas' => $unidades_productivas]);
     }
 
@@ -40,7 +40,9 @@ class UnidadProductivaController extends Controller
      */
     public function store(UnidadProductivaRequest $request)
     {
+      $productos = $request->productos;
       $UnidadProductiva = Unidad_Productiva::create($request->validated());
+      $UnidadProductiva->productos()->attach($productos);
       return redirect()->route('unidadProductiva.index');
     }
 
@@ -57,7 +59,7 @@ class UnidadProductivaController extends Controller
      */
     public function edit(Int $unidad_Productiva)
     {
-      $unidad = Unidad_Productiva::find($unidad_Productiva);
+      $unidad = Unidad_Productiva::with('productos')->get()->findOrFail($unidad_Productiva);
 
       $personas = Persona::all();
       $empresas = Empresa::all();
@@ -68,9 +70,18 @@ class UnidadProductivaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UnidadProductivaRequest $request, Unidad_Productiva $unidad_Productiva)
+    public function update(UnidadProductivaRequest $request, Int $unidad_Productiva)
     {
-      $unidad_Productiva->update($request->validated());
+      
+      $unidad = Unidad_Productiva::find($unidad_Productiva);
+      $unidad->update($request->validated());
+
+      $productosIds = array_map(function ($producto) {
+        return is_array($producto) && isset($producto['id']) ? $producto['id'] : $producto;
+      }, $request->productos);
+    
+      $unidad->productos()->sync($productosIds);
+
       return redirect()->route('unidadProductiva.index');
     }
 

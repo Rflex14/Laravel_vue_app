@@ -11,10 +11,10 @@ import Form from '@/Components/Persona/Form.vue'
  
 const form = useForm ({
   rif: '',
-  cedula: 0,
+  cedula: '',
   nombre: '',
   apellido: '',
-  telefono: 0
+  telefono: ''
 })
 </script>
 

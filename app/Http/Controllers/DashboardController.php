@@ -9,6 +9,9 @@ use Inertia\Inertia;
 class DashboardController extends Controller
 {
     public function index() {
+      return Inertia::render('Auth/Login');
+    }
+    /*public function index() {
       return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -16,6 +19,7 @@ class DashboardController extends Controller
         'phpVersion' => PHP_VERSION,
     ]);
     }
+    */
     public function dashboard() {
       return Inertia::render('Dashboard');
     }

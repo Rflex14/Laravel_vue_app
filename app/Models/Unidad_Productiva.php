@@ -20,6 +20,6 @@ class Unidad_Productiva extends Model
   }
   public function productos()
   {
-    return $this->hasMany(Producto::class);
+    return $this->belongsToMany(Producto::class, UnidadProductivaProducto::class, 'unidadProductiva_id', 'producto_id');
   }
 }

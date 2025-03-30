@@ -13,8 +13,8 @@ const form = useForm ({
   rif: '',
   nombre: '',
   nombre_responsable: '',
-  cedula_responsable: 0,
-  telefono_responsable: 0
+  cedula_responsable: '',
+  telefono_responsable: ''
 })
 </script>
 

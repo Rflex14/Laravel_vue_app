@@ -10,10 +10,10 @@ class Producto extends Model
   protected $guarded = [];
   public function almacenes()
   {
-    return $this->BelongsToMany(Almacen::class);
+    return $this->belongsToMany(Almacen::class, AlmacenProducto::class, 'producto_id', 'almacen_id');
   }
   public function unidadesProductivas()
   {
-    return $this->belongsToMany(Unidad_Productiva::class);
+    return $this->belongsToMany(Unidad_Productiva::class, UnidadProductivaProducto::class,'producto_id', 'unidadProductiva_id');
   }
 }

@@ -40,16 +40,18 @@ const form = useForm ({
   este: props.unidad_productiva.este,
   norte: props.unidad_productiva.norte,
   persona_id: props.unidad_productiva.persona_id,
-  empresa_id: props.unidad_productiva.empresa_id
+  empresa_id: props.unidad_productiva.empresa_id,
+  productos: props.unidad_productiva.productos
 })
 onBeforeMount(() => {
   console.log(form);
   console.log(props.unidad_productiva);
 })
+
 </script>
 
 <template>
-  <AppLayout title="Editar Vehiculo">
+  <AppLayout title="Editar Unidad Productiva">
     <template #header>
       <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Editar Unidad Productiva</h1>
     </template>
@@ -57,7 +59,7 @@ onBeforeMount(() => {
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 bg-white border-b border-gray-200">
-            <Form :updating="true" :form="form" :personas="personas" :empresas="empresas" :productos="productos" @submit="form.put(route('unidad_productiva.update', unidad_productiva.id))" />
+            <Form :updating="true" :form="form" :personas="personas" :empresas="empresas" :productos="productos" @submit="form.put(route('unidadProductiva.update', unidad_productiva.id))" />
           </div>
         </div>
       </div>

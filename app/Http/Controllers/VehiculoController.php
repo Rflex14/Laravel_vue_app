@@ -18,7 +18,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-      $vehiculos = vehiculo::paginate(self::NUMERO_DE_OBJETOS_POR_PAGINA);
+      $vehiculos = Vehiculo::with('persona', 'empresa')->paginate(self::NUMERO_DE_OBJETOS_POR_PAGINA);
       return inertia('Vehiculo/Index', props: ['vehiculos' => $vehiculos]);
     }
 

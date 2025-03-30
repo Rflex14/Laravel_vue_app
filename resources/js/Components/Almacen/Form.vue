@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'Unidad_ProductivaForm'
+  name: 'AlmacenForm'
 }
 </script>
 
@@ -50,10 +50,10 @@ defineEmits(['submit'])
 <template>
   <FormSection @submitted="$emit('submit')">
     <template #title>
-      {{ updating ? 'Actualizar Unidad Productiva' : 'Registrar Unidad Productiva' }}
+      {{ updating ? 'Actualizar Almacen' : 'Registrar Almacen' }}
     </template>
     <template #description>
-      {{ updating ? 'Actualizar la Unidad Productiva seleccionada' : 'Registrar una Unidad Productiva nueva' }}
+      {{ updating ? 'Actualizar el Almacen seleccionado' : 'Registrar un Almacen nuevo' }}
     </template>
     <template #form>
       <div class="col-span-6 sm:col-span-6">
@@ -82,24 +82,14 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.direccion" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="hectareasActivas" value="Hectareas Activas" />
-        <TextInput id="hectareasActivas" v-model="form.hectareasActivas" type="number" autocomplete="hectareasActivas" class="mt-1 block w-full" />
-        <InputError :message="$page.props.errors.hectareasActivas" class="mt-2" />
+        <InputLabel for="cantidadMaxima" value="Cantidad Maxima" />
+        <TextInput id="cantidadMaxima" v-model="form.cantidadMaxima" type="number" autocomplete="cantidadMaxima" class="mt-1 block w-full" />
+        <InputError :message="$page.props.errors.cantidadMaxima" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="hectareasInactivas" value="Hectareas Inactivas" />
-        <TextInput id="hectareasInactivas" v-model="form.hectareasInactivas" type="number" autocomplete="hectareasInactivas" class="mt-1 block w-full" />
-        <InputError :message="$page.props.errors.hectareasInactivas" class="mt-2" />
-      </div>
-      <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="este" value="Coordenada Este" />
-        <TextInput id="este" v-model="form.este" type="number" autocomplete="este" class="mt-1 block w-full" />
-        <InputError :message="$page.props.errors.este" class="mt-2" />
-      </div>
-      <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="norte" value="Coordenada Norte" />
-        <TextInput id="norte" v-model="form.norte" type="number" autocomplete="norte" class="mt-1 block w-full" />
-        <InputError :message="$page.props.errors.norte" class="mt-2" />
+        <InputLabel for="unidad" value="Unidad de medicion" />
+        <TextInput id="Unidad" v-model="form.unidad" type="text" autocomplete="unidad" class="mt-1 block w-full" />
+        <InputError :message="$page.props.errors.unidad" class="mt-2" />
       </div>
       <SeleccionPropietario :personas="personas" :empresas="empresas" :form="form" />
       <SeleccionProducto name="productos" id="productos" :seleccionados="props.form.productos" :productos="productos" @onProductos="onProductos" />

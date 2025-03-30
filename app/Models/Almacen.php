@@ -9,6 +9,8 @@ class Almacen extends Model
   use HasFactory;
   protected $guarded = [];
 
+  protected $table = 'almacenes';
+
   public function persona()
   {
     return $this->belongsTo(Persona::class);
@@ -19,7 +21,7 @@ class Almacen extends Model
   }
   public function productos()
   {
-    return $this->hasMany(Producto::class);
+    return $this->belongsToMany(Producto::class, AlmacenProducto::class, 'almacen_id', 'producto_id');
   }
 }
 

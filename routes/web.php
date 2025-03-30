@@ -10,6 +10,7 @@ use App\Http\Controllers\UnidadProductivaController;
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\AlmacenProductoController;
 use App\Http\Controllers\UnidadProductivaProductoController;
+use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index']);
@@ -25,4 +26,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
   Route::resource('/almacen', AlmacenController::class);
   Route::resource('/almacenProducto', AlmacenProductoController::class);
   Route::resource('/unidadProductivaProducto', UnidadProductivaProductoController::class);
+  Route::get('/excel/almacenes', [ExcelController::class, 'almacenes'])->name('excel.almacenes');
+  Route::get('/excel/almacenesCreate', [ExcelController::class, 'almacenesCreate'])->name('excel.almacenesCreate');
+  Route::post('/excel/almacenesStore', [ExcelController::class, 'almacenesStore'])->name('excel.almacenesStore');
 });
