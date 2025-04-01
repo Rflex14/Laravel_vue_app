@@ -27,6 +27,7 @@ class AlmacenRequest extends FormRequest
           'estado' => ['required', 'string', 'max:32'],
           'municipio' => ['required', 'string', 'max:255'],
           'parroquia' => ['required', 'string', 'max:255'],
+          'sector' => ['required', 'string', 'max:255'],
           'direccion' => ['required', 'string', 'max:255'],
           'cantidadMaxima' => ['required', 'numeric'],
           'unidad' => ['required', 'string'],

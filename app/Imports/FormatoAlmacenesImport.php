@@ -10,28 +10,43 @@ class FormatoAlmacenesImport implements ToCollection
     /**
     * @param Collection $collection
     */
+
+    public $data;
+
     public function collection(Collection $collection)
     {
-        dd($collection);
-        $registro = [
-          'tipo_evento' => $collection['tipo de evento'],
-          'registro_notificacion' => $collection['registro de notificacion'],
-          'fecha_notificacion' => $collection['fecha de notificacion'],
-          'fecha_inspeccion' => $collection['fecha de inspeccion'],
-          'semana_epidemiologica' => $collection['semana epid.'],
-          'almacen_nombre' => $collection['lugar o sitio donde se realiza la inspeccion (Silos, almacenes y depositos)'],
-          'propietario_nombre' => $collection['nombre de la empresa inspeccionada'],
-          'responsable_nombre' => $collection['responsable de la empresa'],
-          'producto_nombre' => $collection['rubro o producto'],
-          'cantidad_total' => $collection['cantidad total de producto'],
-          'unidad' => $collection['UNIDAD DE MEDIDA (t/kg/plantas)'],
-          'cantidad_nacional' => $collection['CANT. PRODUCTO NACIONAL O IMPORTADO'],
-          'cantidad_afectado' => $collection['CANTIDAD  PRODUCTO   AFECTADO (t/kg/plantas)'],
-          'plagas' => $collection['PLAGAS O ENFERMEDADES'],
-          'medidas_recomendadas' => $collection['MEDIDAS RECOMENDADAS'],
-          'fitosanitario' => $collection['POSEE CERTIFICADO FITOSANITARIO'],
-          'fecha_proxima' => $collection['FECHA PROXIMA VISITA'],
-          'tecnico_nombre' => $collection['TECNICO RESPONSABLE DE LA INSPECCION']
-        ];
+        $registros = [];
+        foreach ($collection as $registro) {
+          $registros[] = [
+            'tipo_evento' => $registro[0],
+            'registro_notificacion' => $registro[1],
+            'fecha_notificacion' => $registro[2],
+            'fecha_inspeccion' => $registro[3],
+            'semana_epidemiologica' => $registro[4],
+            'estado' => $registro[5],
+            'municipio' => $registro[6],
+            'parroquia' => $registro[7],
+            'sector' => $registro[8],
+            'almacen_nombre' => $registro[9],
+            'propietario_nombre' => $registro[10],
+            'rif' => $registro[11],
+            'producto_nombre' => $registro[12],
+            'cantidad_total' => $registro[13],
+            'unidad' => $registro[14],
+            'cantidad_nacional' => $registro[15],
+            'cantidad_afectado' => $registro[16],
+            'plagas' => $registro[17],
+            'responsable_nombre' => $registro[18],
+            'responsable_ci' => $registro[19],
+            'responsable_telefono' => $registro[20],
+            'medidas_recomendadas' => $registro[21],
+            'fitosanitario' => $registro[22],
+            'fecha_proxima' => $registro[23],
+            'observaciones' => $registro[24],
+            'tecnico_nombre' => $registro[25],
+            'tecnico_telefono' => $registro[26]
+          ];
+        }
+        $this->data = $registros;
     }
 }

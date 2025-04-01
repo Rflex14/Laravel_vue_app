@@ -10,10 +10,6 @@ import { useForm } from '@inertiajs/vue3'
 import Form from '@/Components/Almacen/Form.vue'
  
 const props = defineProps ({
-  personas: {
-    type: Object,
-    required: true
-  },
   empresas: {
     type: Object,
     required: true
@@ -29,10 +25,10 @@ const form = useForm ({
   estado: '',
   municipio: '',
   parroquia: '',
+  sector: '',
   direccion: '',
   cantidadMaxima: '',
   unidad: '',
-  persona_id: '',
   empresa_id: '',
   productos: []
 })
@@ -48,7 +44,7 @@ const form = useForm ({
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 bg-white border-b border-gray-200">
-            <Form :form="form" :personas="personas" :empresas="empresas" :productos="productos" @submit="form.post(route('almacen.store'))" />
+            <Form :form="form" :empresas="empresas" :productos="productos" @submit="form.post(route('almacen.store'))" />
           </div>
         </div>
       </div>

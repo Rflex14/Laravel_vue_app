@@ -3,11 +3,8 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3'
 import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3'
-import InputError from '@/Components/InputError.vue'
-import InputLabel from '@/Components/InputLabel.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
-import TextInput from '@/Components/TextInput.vue'
+import { Inertia } from '@inertiajs/inertia'
 
 const props = defineProps({
   almacenes: {
@@ -17,10 +14,12 @@ const props = defineProps({
   tecnicos: {
     type: Object,
     required: true
+  },
+  tablas: {
+    type: Object,
+    required: true
   }
 })
-
-const cantidadRegistros = ref(1);
 
 const date = new Date();
 let year = date.getFullYear();
@@ -44,13 +43,14 @@ const form = useForm ({
   fitosanitario: '',
   fecha_proxima: '',
   observaciones: '',
-  tecnico_id: ''
+  tecnico_id: '',
+  archivo: "formatos\Formato Data de Silos, Almacenes, Depósitos\Formato Data de Silos, Almacenes, Depósitos 2025.xlsx"
 })
 
-const isOwner = (almacen, index) => {
-  console.log(form.almacen_id);
-  console.log(almacen);
-  return almacen.id === form[index].almacen_id;
+const eliminar = () => {
+  if (confirm('¿Esta seguro que desea eliminar todos los registros de la tabla de excel actual?')) {
+    Inertia.get(route('excel.almacenesDestroy'))
+  }
 }
 
 </script>
@@ -62,10 +62,89 @@ const isOwner = (almacen, index) => {
               Formato Data de Silos, Almacenes, Depósitos {{year}}
             </h2>
         </template>
-
-        <div class="py-12">
-            <div class="max-w-full mx-auto sm:px-6 lg:px-8">
-              <form>
+        <div class="py-4">
+          <div class="max-w-full mx-auto sm:px-6 lg:px-8 overflow-x-auto">
+            <div class="grid grid-cols-3 grid-rows-1 place-items-center w-full p-6 my-4 text-sm bg-white shadow-xl sm:rounded-lgp-4">
+              <SecondaryButton>
+                <Link :href="route('excel.almacenesCreate')">
+                  Registrar nueva inspeccion
+                </Link>
+              </SecondaryButton>
+              <SecondaryButton @click="eliminar">Reiniciar archivo de Excel</SecondaryButton>
+              <SecondaryButton @click="eliminar">Descargar Archivo Excel</SecondaryButton>
+            </div>
+          </div>
+            <div v-if="tablas !== null" class="max-w-full mx-auto sm:px-6 lg:px-8 overflow-x-auto">
+              <table v-if="tablas[6] !== null" class="w-full py-2 text-sm bg-white shadow-xl sm:rounded-lgp-4 border-separate border-spacing-x-12">
+                <thead>
+                  <tr>
+                    <th>Tipo de Evento</th><th>Registro de Notificacion</th><th>Fecha de Notificacion</th><th>Fecha de Inspeccion</th><th>Semana Epidemiologica</th><th>Lugar donde se realizo la inspeccion</th><th>Nombre Propietario</th><th>Rubro o Producto</th><th>Cantidad de Producto</th><th>Unidad de Medida</th><th>Cant de Producto Nacional o Importado</th><th>Cant de Producto Afectado</th><th>Plagas o Enfermedades</th><th>Responsable de la Empresa</th><th>Medidas Recomendadas</th><th>¿Posee Certificado Fitosanitario?</th><th>Fecha de la Proxima Visita</th><th>Tecnico Responsable de la Inspeccion</th>
+                  </tr>
+                </thead>
+                <tbody>  
+                  <tr v-for="(tabla, index) in tablas" class="text-center">
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.tipo_evento }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.registro_notificacion}}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.fecha_notificacion }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.fecha_inspeccion }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.semana_epidemiologica }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.almacen_nombre }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.propietario_nombre}}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.producto_nombre }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.cantidad_total }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.unidad }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.cantidad_nacional }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.cantidad_afectado }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.plagas }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.responsable_nombre }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.medidas_recomendadas }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.fitosanitario }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.fecha_proxima }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      {{ tabla.tecnico_nombre }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </AppLayout>
+<!--
+    <form>
                 <div class="text-sm bg-white overflow-hidden shadow-xl sm:rounded-lg">
                   <div class="p-6">
                     <Link :href="route('excel.almacenesCreate')">
@@ -170,8 +249,7 @@ const isOwner = (almacen, index) => {
                     </div>
                   </div>
                 </div>
-              </form>   
-            </div>
-        </div>
-    </AppLayout>
+              </form>   -->
 </template>
+
+

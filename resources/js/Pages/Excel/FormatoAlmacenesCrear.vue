@@ -32,7 +32,6 @@ const form = useForm ({
   semana_epidemiologica: '',
   almacen_id: '',
   empresa_id: '',
-  persona_id: '',
   producto_id: '',
   cantidad_total: '',
   unidad: '',
@@ -43,7 +42,8 @@ const form = useForm ({
   fitosanitario: '',
   fecha_proxima: '',
   observaciones: '',
-  tecnico_id: ''
+  tecnico_id: '',
+  archivo: "formatos/Formato Data de Silos, Almacenes, Depósitos/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx"
 })
 </script>
 

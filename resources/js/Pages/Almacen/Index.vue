@@ -49,13 +49,10 @@ const deleteCategory = id => {
                     <p class="text-sm leading-6 text-gray-900 row-span-2">{{almacen.estado}}</p>
                     <p class="text-sm leading-6 text-gray-900 row-span-2">{{almacen.municipio}}</p>
                     <p class="text-sm leading-6 text-gray-900 row-span-2">{{almacen.parroquia}}</p>
+                    <p class="text-sm leading-6 text-gray-900 row-span-2">{{almacen.sector}}</p>
                   </div>
                   <p class="text-sm leading-6 text-gray-900 col-span-2 row-span-2">{{almacen.direccion}}</p>
-                  <div v-if="!(almacen.persona_id === null)" class="w-full h-full place-items-center col-span-2 row-span-2 grid grid-cols-2 rounded border border-solid border-black bg-yellow-400">
-                    <p class="text-sm flex items-center leading-6 font-semibold text-gray-900 row-span-2">{{almacen.persona.rif}}</p>
-                    <p class="text-sm flex items-center leading-6 font-semibold text-gray-900 row-span-2">{{almacen.persona.nombre}}</p>
-                  </div>
-                  <div v-else class="w-full h-full place-items-center col-span-2 row-span-2 grid grid-cols-2 rounded border border-solid border-black bg-yellow-400">
+                  <div class="w-full h-full place-items-center col-span-2 row-span-2 grid grid-cols-2 rounded border border-solid border-black bg-yellow-400">
                     <p class="text-sm flex items-center leading-6 font-semibold text-gray-900 row-span-2">{{almacen.empresa.rif}}</p>
                     <p class="text-sm flex items-center leading-6 font-semibold text-gray-900 row-span-2">{{almacen.empresa.nombre}}</p>
                   </div>

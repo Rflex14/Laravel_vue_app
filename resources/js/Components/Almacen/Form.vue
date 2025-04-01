@@ -16,10 +16,6 @@ import SeleccionProducto from '@/Components/Compartido/SeleccionProducto.vue'
 
 
 const props = defineProps({
-  personas: {
-    type: Object,
-    required: true
-  },
   empresas: {
     type: Object,
     required: true
@@ -77,6 +73,11 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.parroquia" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
+        <InputLabel for="sector" value="Sector" />
+        <TextInput id="sector" v-model="form.sector" type="text" autocomplete="sector" class="mt-1 block w-full" />
+        <InputError :message="$page.props.errors.sector" class="mt-2" />
+      </div>
+      <div class="col-span-6 sm:col-span-6">
         <InputLabel for="direccion" value="Direccion" />
         <TextInput id="direccion" v-model="form.direccion" type="text" autocomplete="direccion" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.direccion" class="mt-2" />
@@ -91,7 +92,14 @@ defineEmits(['submit'])
         <TextInput id="Unidad" v-model="form.unidad" type="text" autocomplete="unidad" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.unidad" class="mt-2" />
       </div>
-      <SeleccionPropietario :personas="personas" :empresas="empresas" :form="form" />
+      <div class="col-span-6 sm:col-span-6">
+        <InputLabel for="empresa_id" value="Empresa propietaria" />
+        <select name="empresa_id" id="empresa_id" v-model="form.empresa_id">
+          <option value="">Seleccione</option>
+          <option v-for="empresa in empresas" :value="empresa.id">{{ empresa.rif }}</option>
+          <InputError :message="$page.props.errors.empresa_id" class="mt-2" />
+        </select>
+      </div>
       <SeleccionProducto name="productos" id="productos" :seleccionados="props.form.productos" :productos="productos" @onProductos="onProductos" />
     </template>
     <template #actions>

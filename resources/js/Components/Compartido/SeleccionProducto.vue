@@ -30,8 +30,6 @@ onBeforeMount(() => {
   selection.value.forEach(elemento => {
     ids.value.push(elemento.id);
   });
-  console.log(selection.value);
-  console.log(ids.value);
 }
 })
 

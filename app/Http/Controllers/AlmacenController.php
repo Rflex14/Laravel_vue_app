@@ -18,7 +18,7 @@ class AlmacenController extends Controller
      */
     public function index()
     {
-      $almacenes = Almacen::with('productos', 'persona', 'empresa')->paginate(self::NUMERO_DE_OBJETOS_POR_PAGINA);
+      $almacenes = Almacen::with('productos', 'empresa')->paginate(self::NUMERO_DE_OBJETOS_POR_PAGINA);
       return inertia('Almacen/Index', props: ['almacenes' => $almacenes]);
     }
 
@@ -27,10 +27,9 @@ class AlmacenController extends Controller
      */
     public function create()
     {
-      $personas = Persona::all();
       $empresas = Empresa::all();
       $productos = Producto::all();
-      return Inertia('Almacen/Crear', props: ['personas' => $personas, 'empresas' => $empresas, 'productos' => $productos]);
+      return Inertia('Almacen/Crear', props: ['empresas' => $empresas, 'productos' => $productos]);
     }
 
     /**
@@ -59,10 +58,9 @@ class AlmacenController extends Controller
     {
       $_almacen = Almacen::with('productos')->get()->findOrFail($almacen);
 
-      $personas = Persona::all();
       $empresas = Empresa::all();
       $productos = Producto::all();
-      return inertia('Almacen/Editar', ['almacen' => $_almacen, 'personas' => $personas, 'empresas' => $empresas, 'productos' => $productos]);
+      return inertia('Almacen/Editar', ['almacen' => $_almacen, 'empresas' => $empresas, 'productos' => $productos]);
     }
 
     /**
