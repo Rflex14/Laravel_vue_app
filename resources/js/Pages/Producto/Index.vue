@@ -46,7 +46,7 @@ const deleteCategory = id => {
                 <div class="m-auto w-1/2 pl-4 grid grid-cols-2 grid-rows-2 place-content-evenly">
                   <p class="text-sm flex items-center font-semibold leading-6 text-gray-900 row-span-2">{{producto.nombre}}</p>
                   <Link class="mb-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" :href="route('producto.edit', producto.id)">EDITAR</Link>
-                  <Link class="mt-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" @click="deleteCategory(producto.id)">BORRAR</Link>
+                  <button class="mt-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" @click="deleteCategory(producto.id)">BORRAR</button>
                 </div>
               </div>
             </li>

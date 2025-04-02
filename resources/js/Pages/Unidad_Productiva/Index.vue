@@ -63,7 +63,7 @@ const deleteCategory = id => {
                     <p class="ml-1 font-semibold text-sm" v-for="producto in unidad_productiva.productos">-{{producto.nombre}}</p>
                   </div>
                   <Link class="w-full flex items-center justify-center h-5/6 mb-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" :href="route('unidadProductiva.edit', unidad_productiva.id)">EDITAR</Link>
-                  <Link class="w-full flex items-center justify-center h-5/6 mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(unidad_productiva.id)">BORRAR</Link>
+                  <button class="w-full flex items-center justify-center h-5/6 mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(unidad_productiva.id)">BORRAR</button>
                 </div>
               </div>
             </li>

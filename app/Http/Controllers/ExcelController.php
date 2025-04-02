@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use DateTime;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ExcelController extends Controller
 {
@@ -115,6 +116,30 @@ class ExcelController extends Controller
     }
     public function almacenesDestroy() {
       File::delete(public_path($this->pathAlmacenes));
+      return redirect()->route('excel.almacenes');
+    }
+    public function almacenesDelete(int $index) {
+      
+      $rowIndex = $index; // Get the row index from the view
+      $templatePath = public_path('formatos/FormatoDataAlmacenes/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx');
+  
+      if (!file_exists($templatePath)) {
+          return response()->json(['error' => 'Template not found'], 404);
+      }
+  
+      // Load the preformatted file
+      $reader = IOFactory::createReader('Xlsx');
+      $spreadsheet = $reader->load($templatePath);
+      $sheet = $spreadsheet->getActiveSheet();
+  
+      // Delete the specified row
+      $sheet->removeRow($rowIndex+1);
+  
+      // Save the updated file
+      $outputPath = public_path('formatos/FormatoDataAlmacenes/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx');
+      $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+      $writer->save($outputPath);
+  
       return redirect()->route('excel.almacenes');
     }
 }

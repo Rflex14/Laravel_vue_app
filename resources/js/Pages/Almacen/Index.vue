@@ -60,7 +60,7 @@ const deleteCategory = id => {
                     <p class="ml-1 font-semibold text-sm" v-for="producto in almacen.productos">-{{producto.nombre}}</p>
                   </div>
                   <Link class="w-full flex items-center justify-center h-5/6 mb-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" :href="route('almacen.edit', almacen.id)">EDITAR</Link>
-                  <Link class="w-full flex items-center justify-center h-5/6 mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(almacen.id)">BORRAR</Link>
+                  <button class="w-full flex items-center justify-center h-5/6 mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(almacen.id)">BORRAR</button>
                 </div>
               </div>
             </li>

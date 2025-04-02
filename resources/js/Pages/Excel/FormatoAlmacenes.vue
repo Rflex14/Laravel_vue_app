@@ -47,16 +47,28 @@ const form = useForm ({
   archivo: "formatos\Formato Data de Silos, Almacenes, Depósitos\Formato Data de Silos, Almacenes, Depósitos 2025.xlsx"
 })
 
-const eliminar = () => {
+const eliminarArchivo = () => {
   if (confirm('¿Esta seguro que desea eliminar todos los registros de la tabla de excel actual?')) {
     Inertia.get(route('excel.almacenesDestroy'))
+  }
+}
+const descargar = () => {
+  const path = 'formatos/FormatoDataAlmacenes/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx';
+  const hora = new Date().getTime(); // para desactivar cache
+  const encodedPath = encodeURIComponent(path); // Encode special characters
+  const url = route('descarga.formatoAlmacenes', { info: encodedPath}) + '?t=${hora}';
+  window.location.href = url;
+}
+const eliminarFila = (index) => {
+  if (confirm('¿Esta seguro que desea eliminar este registro de la tabla de excel actual?')) {
+    Inertia.delete(route('excel.almacenesDelete', index))
   }
 }
 
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Dashboard"> 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
               Formato Data de Silos, Almacenes, Depósitos {{year}}
@@ -70,15 +82,15 @@ const eliminar = () => {
                   Registrar nueva inspeccion
                 </Link>
               </SecondaryButton>
-              <SecondaryButton @click="eliminar">Reiniciar archivo de Excel</SecondaryButton>
-              <SecondaryButton @click="eliminar">Descargar Archivo Excel</SecondaryButton>
+              <SecondaryButton @click="eliminarArchivo">Reiniciar archivo de Excel</SecondaryButton>
+              <SecondaryButton @click="descargar">Descargar Archivo Excel</SecondaryButton>
             </div>
           </div>
             <div v-if="tablas !== null" class="max-w-full mx-auto sm:px-6 lg:px-8 overflow-x-auto">
-              <table v-if="tablas[6] !== null" class="w-full py-2 text-sm bg-white shadow-xl sm:rounded-lgp-4 border-separate border-spacing-x-12">
+              <table v-if="tablas[6] !== null" class="w-full pt-2 pb-6 text-sm bg-white shadow-xl sm:rounded-lgp-4 border-separate border-spacing-x-12">
                 <thead>
                   <tr>
-                    <th>Tipo de Evento</th><th>Registro de Notificacion</th><th>Fecha de Notificacion</th><th>Fecha de Inspeccion</th><th>Semana Epidemiologica</th><th>Lugar donde se realizo la inspeccion</th><th>Nombre Propietario</th><th>Rubro o Producto</th><th>Cantidad de Producto</th><th>Unidad de Medida</th><th>Cant de Producto Nacional o Importado</th><th>Cant de Producto Afectado</th><th>Plagas o Enfermedades</th><th>Responsable de la Empresa</th><th>Medidas Recomendadas</th><th>¿Posee Certificado Fitosanitario?</th><th>Fecha de la Proxima Visita</th><th>Tecnico Responsable de la Inspeccion</th>
+                    <th>Tipo de Evento</th><th>Registro de Notificacion</th><th>Fecha de Notificacion</th><th>Fecha de Inspeccion</th><th>Semana Epidemiologica</th><th>Lugar donde se realizo la inspeccion</th><th>Nombre Propietario</th><th>Rubro o Producto</th><th>Cantidad de Producto</th><th>Unidad de Medida</th><th>Cant de Producto Nacional o Importado</th><th>Cant de Producto Afectado</th><th>Plagas o Enfermedades</th><th>Responsable de la Empresa</th><th>Medidas Recomendadas</th><th>¿Posee Certificado Fitosanitario?</th><th>Fecha de la Proxima Visita</th><th>Tecnico Responsable de la Inspeccion</th><th>Eliminar Fila</th>
                   </tr>
                 </thead>
                 <tbody>  
@@ -136,6 +148,9 @@ const eliminar = () => {
                     </td>
                     <td v-if="index >= 6 && tabla.tipo_evento !== null">
                       {{ tabla.tecnico_nombre }}
+                    </td>
+                    <td v-if="index >= 6 && tabla.tipo_evento !== null">
+                      <button @click="eliminarFila(index)" class="w-full items-center justify-center h-5/6 text-sm text-gray-900 font-bold px-3 py-2 my-1 bg-red-500 rounded border border-solid border-black">Borrar</button>
                     </td>
                   </tr>
                 </tbody>

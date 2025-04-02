@@ -50,7 +50,7 @@ const deleteCategory = id => {
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{empresa.cedula_responsable}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{empresa.telefono_responsable}}</p>
                   <Link class="mb-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" :href="route('empresa.edit', empresa.id)">EDITAR</Link>
-                  <Link class="mt-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" @click="deleteCategory(empresa.id)">BORRAR</Link>
+                  <button class="mt-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" @click="deleteCategory(empresa.id)">BORRAR</button>
                 </div>
               </div>
             </li>

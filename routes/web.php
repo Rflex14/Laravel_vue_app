@@ -11,6 +11,7 @@ use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\AlmacenProductoController;
 use App\Http\Controllers\UnidadProductivaProductoController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\DescargaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index']);
@@ -30,4 +31,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
   Route::get('/excel/almacenesCreate', [ExcelController::class, 'almacenesCreate'])->name('excel.almacenesCreate');
   Route::post('/excel/almacenesStore', [ExcelController::class, 'almacenesStore'])->name('excel.almacenesStore');
   Route::get('/excel/almacenesDestroy', [ExcelController::class, 'almacenesDestroy'])->name('excel.almacenesDestroy');
+  Route::get('/descarga/formatoAlmacenes/{info}', [DescargaController::class, 'formatoAlmacenes'])->where('info', '.*')->name('descarga.formatoAlmacenes');
+  Route::delete('/descarga/almacenesDelete/{index}', [ExcelController::class, 'almacenesDelete'])->name('excel.almacenesDelete');
 });
