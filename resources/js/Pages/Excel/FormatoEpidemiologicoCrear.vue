@@ -1,14 +1,26 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3'
-import Form from '@/Components/Excel/FormFormatoAlmacenes.vue'
+import Form from '@/Components/Excel/FormFormatoEpidemiologico.vue'
 
 const props = defineProps({
+  unidades: {
+    type: Object,
+    required: true
+  },
   almacenes: {
     type: Object,
     required: true
   },
   tecnicos: {
+    type: Object,
+    required: true
+  },
+  vehiculos: {
+    type: Object,
+    required: true
+  },
+  productos: {
     type: Object,
     required: true
   }
@@ -20,23 +32,29 @@ let year = date.getFullYear();
 const form = useForm ({
   tipo_evento: '',
   registro_notificacion: '',
+  registro_eventos_fitosanitarios: '',
   fecha_notificacion: '',
-  fecha_inspeccion: '',
+  dia_mes_año: '',
   semana_epidemiologica: '',
-  almacen_id: '',
-  empresa_id: '',
+  tipo_lugar_inspeccion: '',
+  lugar_id: '',
   producto_id: '',
-  cantidad_total: '',
+  plaga_nombre_comun: '',
+  plaga_nombre_cientifico: '',
+  porcentaje_infestacion: '',
+  cantidad_inspeccionada: '',
   unidad: '',
-  cantidad_nacional: '',
   cantidad_afectado: '',
-  plagas: '',
-  medidas_recomendadas: '',
-  fitosanitario: '',
-  fecha_proxima: '',
+  parte_afectada: '',
+  estado_fenologico: '',
+  propietario_id: '',
+  punto_referencia: '',
+  nombre_laboratorio: '',
+  fecha_envio: '',
+  numero_muestras_enviadas: '',
   observaciones: '',
   tecnico_id: '',
-  archivo: "formatos/Formato Data de Silos, Almacenes, Depósitos/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx"
+  responsable_transcripcion: '',
 })
 </script>
 
@@ -49,7 +67,7 @@ const form = useForm ({
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 bg-white border-b border-gray-200">
-            <Form :form="form" :almacenes="almacenes" :tecnicos="tecnicos" @submit="form.post(route('excel.almacenesStore'))" />
+            <Form :form="form" :productos="productos" :almacenes="almacenes" :unidades="unidades" :vehiculos="vehiculos" :tecnicos="tecnicos" @submit="form.post(route('excel.epidemiologicoStore'))" />
           </div>
         </div>
       </div>

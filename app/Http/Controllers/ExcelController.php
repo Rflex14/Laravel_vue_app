@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Exports\FormatoAlmacenesExport;
 use App\Imports\FormatoAlmacenesImport;
+use App\Imports\FormatoEpidemiologicoImport;
+use App\Models\Unidad_Productiva;
 use App\Models\Almacen;
 use App\Models\Empresa;
 use App\Models\Producto;
 use App\Models\Tecnico;
+use App\Models\Vehiculo;
 use App\Http\Requests\ExcelDataAlmacenesRequest;
+use App\Http\Requests\ExcelDataEpidemiologicaRequest;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use DateTime;
@@ -19,6 +23,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class ExcelController extends Controller
 {
     public $pathAlmacenes = 'formatos/FormatoDataAlmacenes/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx';
+    public $pathEpidemiologico = 'formatos/Formato Data Epidemiológica/Formato Data Epidemiológica 2025.xlsx';
     public function almacenes() 
     {
       $tablas = new FormatoAlmacenesImport;
@@ -141,5 +146,36 @@ class ExcelController extends Controller
       $writer->save($outputPath);
   
       return redirect()->route('excel.almacenes');
+    }
+    public function formatoEpidemiologico () {
+      $tablas = new FormatoEpidemiologicoImport;
+      if (file_exists(public_path($this->pathEpidemiologico))) {
+        Excel::import($tablas, public_path($this->pathEpidemiologico));
+        $datos = $tablas->data;
+      } else {
+        $datos = null;
+      }
+      $tecnicos = Tecnico::get();
+      $almacenes = Almacen::with('productos', 'empresa')->get();
+      $unidades = Unidad_Productiva::with('productos', 'persona', 'empresa');
+      $vehiculos = Vehiculo::with('persona', 'empresa');
+      return inertia('Excel/FormatoEpidemiologico', props: ['vehiculos' => $vehiculos,'unidades' => $unidades,'almacenes' => $almacenes, 'tecnicos' => $tecnicos, 'tablas' => $datos]);
+    }
+    public function epidemiologicoCreate () {
+      $productos = Producto::get();
+      $tecnicos = Tecnico::get();
+      $almacenes = Almacen::with('productos', 'persona', 'empresa')->get();
+      $unidades = Unidad_Productiva::with('productos', 'persona', 'empresa')->get();
+      $vehiculos = Vehiculo::with('persona', 'empresa')->get();
+      return inertia('Excel/FormatoEpidemiologicoCrear', props: ['productos' => $productos,'vehiculos' => $vehiculos,'unidades' => $unidades,'almacenes' => $almacenes, 'tecnicos' => $tecnicos]);
+    }
+    public function epidemiologicoStore(ExcelDataEpidemiologicaRequest $request) {
+      dd($request);
+    }
+    public function epidemiologicoDestroy() {
+      dd("fino");
+    }
+    public function epidemiologicoDelete(int $index) {
+      dd("fino");
     }
 }

@@ -31,6 +31,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
   Route::get('/excel/almacenesCreate', [ExcelController::class, 'almacenesCreate'])->name('excel.almacenesCreate');
   Route::post('/excel/almacenesStore', [ExcelController::class, 'almacenesStore'])->name('excel.almacenesStore');
   Route::get('/excel/almacenesDestroy', [ExcelController::class, 'almacenesDestroy'])->name('excel.almacenesDestroy');
-  Route::get('/descarga/formatoAlmacenes/{info}', [DescargaController::class, 'formatoAlmacenes'])->where('info', '.*')->name('descarga.formatoAlmacenes');
-  Route::delete('/descarga/almacenesDelete/{index}', [ExcelController::class, 'almacenesDelete'])->name('excel.almacenesDelete');
+  Route::delete('/excel/almacenesDelete/{index}', [ExcelController::class, 'almacenesDelete'])->name('excel.almacenesDelete');
+  Route::get('/excel/formatoEpidemiologico', [ExcelController::class, 'formatoEpidemiologico'])->name('excel.epidemiologico');
+  Route::get('/excel/epidemiologicoCreate', [ExcelController::class, 'epidemiologicoCreate'])->name('excel.epidemiologicoCreate');
+  Route::post('/excel/epidemiologicoStore', [ExcelController::class, 'epidemiologicoStore'])->name('excel.epidemiologicoStore');
+  Route::get('/excel/EpidemiologicoDestroy', [ExcelController::class, 'EpidemiologicoDestroy'])->name('excel.epidemiologicoDestroy');
+  Route::delete('/excel/EpidemiologicoDelete/{index}', [ExcelController::class, 'EpidemiologicoDelete'])->name('excel.epidemiologicoDelete');
+  Route::get('/descarga/formatoAlmacenes', [DescargaController::class, 'formatoAlmacenes'])->name('descarga.formatoAlmacenes');
+  Route::get('/descarga/formatoEpidemiologico', [DescargaController::class, 'formatoEpidemiologico'])->name('descarga.formatoEpidemiologico');
 });

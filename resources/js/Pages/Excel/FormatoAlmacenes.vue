@@ -53,10 +53,7 @@ const eliminarArchivo = () => {
   }
 }
 const descargar = () => {
-  const path = 'formatos/FormatoDataAlmacenes/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx';
-  const hora = new Date().getTime(); // para desactivar cache
-  const encodedPath = encodeURIComponent(path); // Encode special characters
-  const url = route('descarga.formatoAlmacenes', { info: encodedPath}) + '?t=${hora}';
+  const url = route('descarga.formatoAlmacenes') + `?t=${new Date().getTime()}`; //The last addition is for disabling browser cache
   window.location.href = url;
 }
 const eliminarFila = (index) => {
