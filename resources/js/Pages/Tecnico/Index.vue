@@ -42,14 +42,14 @@ const deleteCategory = id => {
         <div class="mt-4">
           <ul role="list" class="divide-y divide-gray-100">
             <li class="mb-2" v-for="tecnico in tecnicos.data"> 
-              <div class="w-full px-4 py-3 border-solid border-2 border-gray-900">
+              <div class="w-full px-4 py-3 rounded-lg border-solid border-2 border-gray-900">
                 <div class="w-full pl-4 grid grid-cols-5 grid-rows-2 place-content-evenly">
                   <p class="text-sm flex items-center font-semibold leading-6 text-gray-900 row-span-2">{{tecnico.cedula}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{tecnico.nombre}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{tecnico.apellido}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{tecnico.telefono}}</p>
-                  <Link class="mb-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" :href="route('tecnico.edit', tecnico.id)">EDITAR</Link>
-                  <button class="mt-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" @click="deleteCategory(tecnico.id)">BORRAR</button>
+                  <Link class="w-full flex items-center justify-center h-full mb-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" :href="route('tecnico.edit', tecnico.id)">EDITAR</Link>
+                  <button class="w-full flex items-center justify-center h-full mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(tecnico.id)">BORRAR</button>
                 </div>
               </div>
             </li>

@@ -42,11 +42,11 @@ const deleteCategory = id => {
         <div class="mt-4">
           <ul role="list" class="divide-y divide-gray-100">
             <li class="mb-2" v-for="producto in productos.data"> 
-              <div class="w-full px-4 py-3 border-solid border-2 border-gray-900">
+              <div class="m-auto w-1/2 px-4 py-3 rounded-lg border-solid border-2 border-gray-900">
                 <div class="m-auto w-1/2 pl-4 grid grid-cols-2 grid-rows-2 place-content-evenly">
                   <p class="text-sm flex items-center font-semibold leading-6 text-gray-900 row-span-2">{{producto.nombre}}</p>
-                  <Link class="mb-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" :href="route('producto.edit', producto.id)">EDITAR</Link>
-                  <button class="mt-1 text-sm ml-3 leading-6 text-gray-900 font-bold text-center p-1 bg-red-400 rounded border border-solid border-black" @click="deleteCategory(producto.id)">BORRAR</button>
+                  <Link class="w-full flex items-center justify-center h-full mb-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" :href="route('producto.edit', producto.id)">EDITAR</Link>
+                  <button class="w-full flex items-center justify-center h-full mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(producto.id)">BORRAR</button>
                 </div>
               </div>
             </li>

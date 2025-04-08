@@ -30,6 +30,7 @@ const form = useForm ({
   municipio: '',
   parroquia: '',
   direccion: '',
+  sector: '',
   hectareasActivas: '',
   hectareasInactivas: '',
   este: '',

@@ -178,10 +178,13 @@ class ExcelController extends Controller
 
       if ($request['tipo_lugar_inspeccion'] === 'unidad') {
         $lugar = Unidad_Productiva::findOrFail($request['lugar_id']);
+        $request['tipo_lugar_inspeccion'] = 'Unidad Productiva';
       } else if ($request['tipo_lugar_inspeccion'] === 'almacen') {
         $lugar = Almacen::findOrFail($request['lugar_id']);
+        $request['tipo_lugar_inspeccion'] = 'Almacen';
       } else if ($request['tipo_lugar_inspeccion'] === 'vehiculo') {
         $lugar = Vehiculo::findOrFail($request['lugar_id']);
+        $request['tipo_lugar_inspeccion'] = 'Vehiculo';
       } else {
         dd('what');
       }
@@ -265,9 +268,30 @@ $tablas->data[$index] = [
 
     }
     public function epidemiologicoDestroy() {
-      dd("fino");
+      File::delete(public_path($this->pathEpidemiologico));
+      return redirect()->route('excel.epidemiologico');
     }
     public function epidemiologicoDelete(int $index) {
-      dd("fino");
+      $rowIndex = $index; // Get the row index from the view
+      $templatePath = public_path($this->pathEpidemiologico);
+  
+      if (!file_exists($templatePath)) {
+          return response()->json(['error' => 'Template not found'], 404);
+      }
+  
+      // Load the preformatted file
+      $reader = IOFactory::createReader('Xlsx');
+      $spreadsheet = $reader->load($templatePath);
+      $sheet = $spreadsheet->getActiveSheet();
+  
+      // Delete the specified row
+      $sheet->removeRow($rowIndex+1);
+  
+      // Save the updated file
+      $outputPath = public_path($this->pathEpidemiologico);
+      $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+      $writer->save($outputPath);
+  
+      return redirect()->route('excel.epidemiologico');
     }
 }

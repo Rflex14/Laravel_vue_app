@@ -18,6 +18,7 @@ return new class extends Migration
           $table->string('municipio');
           $table->string('parroquia');
           $table->string('direccion');
+          $table->string('sector');
           $table->integer('hectareasActivas');
           $table->integer('hectareasInactivas');
           $table->integer('este');

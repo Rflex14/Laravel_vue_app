@@ -49,6 +49,7 @@ const deleteCategory = id => {
                     <p class="text-sm leading-6 text-gray-900 row-span-2">{{unidad_productiva.estado}}</p>
                     <p class="text-sm leading-6 text-gray-900 row-span-2">{{unidad_productiva.municipio}}</p>
                     <p class="text-sm leading-6 text-gray-900 row-span-2">{{unidad_productiva.parroquia}}</p>
+                    <p class="text-sm leading-6 text-gray-900 row-span-2">{{unidad_productiva.sector}}</p>
                   </div>
                   <p class="text-sm leading-6 text-gray-900 col-span-2 row-span-2">{{unidad_productiva.direccion}}</p>
                   <div v-if="!(unidad_productiva.persona_id === null)" class="w-full h-full place-items-center col-span-2 row-span-2 grid grid-cols-2 rounded border border-solid border-black bg-yellow-400">

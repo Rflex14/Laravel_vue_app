@@ -77,6 +77,11 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.parroquia" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
+        <InputLabel for="sector" value="Sector" />
+        <TextInput id="sector" v-model="form.sector" type="text" autocomplete="sector" class="mt-1 block w-full" />
+        <InputError :message="$page.props.errors.sector" class="mt-2" />
+      </div>
+      <div class="col-span-6 sm:col-span-6">
         <InputLabel for="direccion" value="Direccion" />
         <TextInput id="direccion" v-model="form.direccion" type="text" autocomplete="direccion" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.direccion" class="mt-2" />

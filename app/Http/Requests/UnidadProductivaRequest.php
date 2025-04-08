@@ -28,6 +28,7 @@ class UnidadProductivaRequest extends FormRequest
           'municipio' => ['required', 'string', 'max:255'],
           'parroquia' => ['required', 'string', 'max:255'],
           'direccion' => ['required', 'string', 'max:255'],
+          'sector' => ['required', 'string', 'max:255'],
           'hectareasActivas' => ['required', 'numeric'],
           'hectareasInactivas' => ['required', 'numeric'],
           'este' => ['required', 'numeric'],

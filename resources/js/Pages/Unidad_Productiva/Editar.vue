@@ -35,6 +35,7 @@ const form = useForm ({
   municipio: props.unidad_productiva.municipio,
   parroquia: props.unidad_productiva.parroquia,
   direccion: props.unidad_productiva.direccion,
+  sector: props.unidad_productiva.direccion,
   hectareasActivas: props.unidad_productiva.hectareasActivas,
   hectareasInactivas: props.unidad_productiva.hectareasInactivas,
   este: props.unidad_productiva.este,
