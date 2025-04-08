@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\FormatoAlmacenesExport;
+use App\Exports\FormatoEpidemiologicoExport;
 use App\Imports\FormatoAlmacenesImport;
 use App\Imports\FormatoEpidemiologicoImport;
 use App\Models\Unidad_Productiva;
 use App\Models\Almacen;
 use App\Models\Empresa;
+use App\Models\Persona;
 use App\Models\Producto;
 use App\Models\Tecnico;
 use App\Models\Vehiculo;
@@ -19,6 +21,8 @@ use DateTime;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
+use function PHPUnit\Framework\isNull;
 
 class ExcelController extends Controller
 {
@@ -81,7 +85,7 @@ class ExcelController extends Controller
       }
       $tablas->data[$index] = [
         'tipo_evento' => $request->tipo_evento,
-        'registro_notificacion' => $request->registro_notificacion,
+        '$request->tipo_evento_notificacion' => $request->$request->tipo_evento_notificacion,
         'fecha_notificacion' => $nuevaFechaNotificacion,
         'fecha_inspeccion' => $nuevaFechaInspeccion,
         'semana_epidemiologica' => $request->semana_epidemiologica,
@@ -170,7 +174,95 @@ class ExcelController extends Controller
       return inertia('Excel/FormatoEpidemiologicoCrear', props: ['productos' => $productos,'vehiculos' => $vehiculos,'unidades' => $unidades,'almacenes' => $almacenes, 'tecnicos' => $tecnicos]);
     }
     public function epidemiologicoStore(ExcelDataEpidemiologicaRequest $request) {
-      dd($request);
+      $request->validated();
+
+      if ($request['tipo_lugar_inspeccion'] === 'unidad') {
+        $lugar = Unidad_Productiva::findOrFail($request['lugar_id']);
+      } else if ($request['tipo_lugar_inspeccion'] === 'almacen') {
+        $lugar = Almacen::findOrFail($request['lugar_id']);
+      } else if ($request['tipo_lugar_inspeccion'] === 'vehiculo') {
+        $lugar = Vehiculo::findOrFail($request['lugar_id']);
+      } else {
+        dd('what');
+      }
+      if (!is_Null($lugar['empresa_id'])) {
+        $propietario = Empresa::find($lugar['empresa_id']);
+      } else {
+        $propietario = Persona::find($lugar['persona_id']);
+      }
+      $producto = Producto::find($request['producto_id']);
+      $tecnico = Tecnico::find($request['tecnico_id']);
+
+      $fechaNotificacion = DateTime::createFromFormat('Y-m-d', $request->fecha_notificacion);
+      $nuevaFechaNotificacion = $fechaNotificacion->format('d/m/Y');
+
+      $fecha = strtotime($request->año_mes_dia);                     
+      $año = date("Y", $fecha); 
+      $mes = date("m", $fecha); 
+      $dia = date("d", $fecha); 
+
+      $fechaEnvio = DateTime::createFromFormat('Y-m-d', $request->fecha_envio);
+      $nuevaFechaEnvio = $fechaEnvio->format('d/m/Y');
+
+      $index = 0;
+      $tablas = new FormatoEpidemiologicoImport;
+      if(file_exists(public_path($this->pathEpidemiologico))) {
+        Excel::import($tablas, public_path($this->pathEpidemiologico));
+      } else {
+        Excel::import($tablas, public_path('formatos/Formato Data Epidemiológica 2025.xlsx'));
+      };
+      //Excel::import($tablas, public_path($request->archivo));
+      foreach ($tablas->data as $fila) {
+        if(!is_null($fila["tipo_evento"])) {          
+          $index++;
+        }
+      }
+
+$tablas->data[$index] = [
+      'tipo_evento' => $request->tipo_evento,
+      'registro_notificacion' => $request->registro_notificacion,
+      'registro_eventos_fitosanitarios' => $request->registro_eventos_fitosanitarios,
+      'fecha_notificacion' => $nuevaFechaNotificacion,
+      'dia' => $dia,
+      'mes' => $mes,
+      'año' => $año,
+      'semana_epidemiologica' => $request->semana_epidemiologica,
+      'estado' => $lugar->estado? $lugar->estado : '',              // Y si es vehiculo?
+      'municipio' => $lugar->municipio? $lugar->municipio : '',        // Y si es vehiculo?
+      'parroquia' => $lugar->parroquia? $lugar->parroquia : '',        // Y si es vehiculo?
+      'sector' => $lugar->sector? $lugar->sector : '',              // Y si es vehiculo?
+      'tipo_lugar_inspeccion' => $request->tipo_lugar_inspeccion,
+      'unidad_direccion' => $lugar->direccion? $lugar->direccion : '',                    // Y si es vehiculo?
+      'unidad_nombre' => $lugar->nombre? $lugar->nombre : $lugar->placa,                           // Y si es vehiculo?
+      'producto_nombre' => $producto->nombre,
+      'plaga_nombre_comun' => $request->plaga_nombre_comun,
+      'plaga_nombre_cientifico' => $request->plaga_nombre_cientifico,
+      'porcentaje_infestacion' => $request->porcentaje_infestacion,
+      'cantidad_inspeccionada' => $request->cantidad_inspeccionada,
+      'unidad' => $request->unidad,
+      'cantidad_afectado' => $request->cantidad_afectado,
+      'parte_afectada' => $request->parte_afectada,
+      'estado_fenologico' => $request->estado_fenologico,
+      'propietario_nombre' => $propietario->nombre,
+      'propietario_ci' => $propietario->rif,
+      'este' => $lugar->este? $lugar->este : '',                 // Y si es vehiculo?
+      'norte' => $lugar->norte? $lugar->norte : '',               // Y si es vehiculo?
+      'punto_referencia' => $request->punto_referencia,
+      'nombre_laboratorio' => $request->nombre_laboratorio,
+      'fecha_envio' => $nuevaFechaEnvio,
+      'numero_muestras_enviadas' => $request->numero_muestras_enviadas,
+      'observaciones' => $request->observaciones,
+      'tecnico_nombre' => $tecnico->nombre,
+      'tecnico_telefono' => $tecnico->telefono,
+      'responsable_transcripcion' => $request->responsable_transcripcion
+      ];
+
+      $subset = $tablas->data;
+      $export = new FormatoEpidemiologicoExport($subset);
+      Excel::store($export, 'nombrerandom.xlsx');
+      
+      return redirect()->route('excel.epidemiologico');
+
     }
     public function epidemiologicoDestroy() {
       dd("fino");

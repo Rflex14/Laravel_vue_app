@@ -34,7 +34,7 @@ const form = useForm ({
   registro_notificacion: '',
   registro_eventos_fitosanitarios: '',
   fecha_notificacion: '',
-  dia_mes_año: '',
+  año_mes_dia: '',
   semana_epidemiologica: '',
   tipo_lugar_inspeccion: '',
   lugar_id: '',
@@ -54,7 +54,7 @@ const form = useForm ({
   numero_muestras_enviadas: '',
   observaciones: '',
   tecnico_id: '',
-  responsable_transcripcion: '',
+  responsable_transcripcion: ''
 })
 </script>
 
