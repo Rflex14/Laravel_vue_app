@@ -23,6 +23,9 @@ import { Link } from '@inertiajs/vue3';
                     <div class="w-full p-6">
                       <Link :href="route('excel.epidemiologico')" :active="route().current('excel.*')" class="p-6 rounded border border-solid border-black">Segundo link</Link>
                     </div>
+                    <div class="w-full p-6">
+                      <Link :href="route('excel.vegetal')" :active="route().current('excel.*')" class="p-6 rounded border border-solid border-black">Tercer link</Link>
+                    </div>
                 </div>
             </div>
         </div>

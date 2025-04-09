@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index']);
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', ])->group(function () {
-  Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+  Route::get('/inicio', [DashboardController::class, 'dashboard'])->name('dashboard');
   Route::resource('/persona', PersonaController::class);
   Route::resource('/empresa', EmpresaController::class);
   Route::resource('/producto', ProductoController::class);
@@ -37,6 +37,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
   Route::post('/excel/epidemiologicoStore', [ExcelController::class, 'epidemiologicoStore'])->name('excel.epidemiologicoStore');
   Route::get('/excel/EpidemiologicoDestroy', [ExcelController::class, 'EpidemiologicoDestroy'])->name('excel.epidemiologicoDestroy');
   Route::delete('/excel/EpidemiologicoDelete/{index}', [ExcelController::class, 'EpidemiologicoDelete'])->name('excel.epidemiologicoDelete');
+  Route::get('/excel/vegetal', [ExcelController::class, 'vegetal'])->name('excel.vegetal');
+  Route::get('/excel/vegetalCreate', [ExcelController::class, 'vegetalCreate'])->name('excel.vegetalCreate');
+  Route::post('/excel/vegetalStore', [ExcelController::class, 'vegetalStore'])->name('excel.vegetalStore');
+  Route::get('/excel/vegetalDestroy', [ExcelController::class, 'vegetalDestroy'])->name('excel.vegetalDestroy');
+  Route::delete('/excel/vegetalDelete/{index}', [ExcelController::class, 'vegetalDelete'])->name('excel.vegetalDelete');
   Route::get('/descarga/formatoAlmacenes', [DescargaController::class, 'formatoAlmacenes'])->name('descarga.formatoAlmacenes');
   Route::get('/descarga/formatoEpidemiologico', [DescargaController::class, 'formatoEpidemiologico'])->name('descarga.formatoEpidemiologico');
+  Route::get('/descarga/formatoVegetal', [DescargaController::class, 'formatoVegetal'])->name('descarga.formatoVegetal');
 });

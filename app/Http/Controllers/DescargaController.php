@@ -34,4 +34,17 @@ class DescargaController extends Controller
         return response()->download($archivo);
       }
     }
+    public function formatoVegetal() {
+      $archivo = public_path('formatos/FORMATO PROTECCION VEGETAL/FORMATO PROTECCION VEGETAL_2025.xlsx');
+      $hora = time();
+      if (!file_exists($archivo)) {
+        return response()->json(['error' => 'El archivo no existe'], 404);
+      } else {
+        if(file_exists(public_path('backup/FORMATO PROTECCION VEGETAL/FORMATO PROTECCION VEGETAL_2025'.$hora.'.xlsx'))) {
+          unlink(public_path('backup/FORMATO PROTECCION VEGETAL/FORMATO PROTECCION VEGETAL_2025'.$hora.'.xlsx'));
+        }
+        copy($archivo, public_path('backup/FORMATO PROTECCION VEGETAL/FORMATO PROTECCION VEGETAL_2025'.$hora.'.xlsx'));
+        return response()->download($archivo);
+      }
+    }
 }

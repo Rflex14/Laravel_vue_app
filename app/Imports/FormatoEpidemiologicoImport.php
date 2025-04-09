@@ -15,7 +15,7 @@ class FormatoEpidemiologicoImport implements ToCollection
 
     public function collection(Collection $collection)
     {
-        $registros = [];
+        $registros = []; 
         foreach ($collection as $registro) {
           $registros[] = [
             'tipo_evento' => $registro[0],

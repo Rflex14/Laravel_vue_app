@@ -6,6 +6,7 @@ use App\Exports\FormatoAlmacenesExport;
 use App\Exports\FormatoEpidemiologicoExport;
 use App\Imports\FormatoAlmacenesImport;
 use App\Imports\FormatoEpidemiologicoImport;
+use App\Imports\FormatoVegetalImport;
 use App\Models\Unidad_Productiva;
 use App\Models\Almacen;
 use App\Models\Empresa;
@@ -28,6 +29,7 @@ class ExcelController extends Controller
 {
     public $pathAlmacenes = 'formatos/FormatoDataAlmacenes/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx';
     public $pathEpidemiologico = 'formatos/Formato Data Epidemiológica/Formato Data Epidemiológica 2025.xlsx';
+    public $pathVegetal = 'formatos/FORMATO PROTECCION VEGETAL/FORMATO PROTECCION VEGETAL_2025.xlsx';
     public function almacenes() 
     {
       $tablas = new FormatoAlmacenesImport;
@@ -293,5 +295,47 @@ $tablas->data[$index] = [
       $writer->save($outputPath);
   
       return redirect()->route('excel.epidemiologico');
+    }
+    public function vegetal() {
+      $tablas = new FormatoVegetalImport;
+      if (file_exists(public_path($this->pathVegetal))) {
+        Excel::import($tablas, public_path($this->pathVegetal));
+        $datos = $tablas->data;
+      } else {
+        $datos = null;
+      }
+      $tecnicos = Tecnico::get();
+      $unidades = Unidad_Productiva::with('productos', 'persona', 'empresa');
+      return inertia('Excel/FormatoVegetal', props: ['unidades' => $unidades, 'tecnicos' => $tecnicos, 'tablas' => $datos]);
+    }
+    public function vegetalCreate() {
+      dd('sirve'); /////////////////////////////// LAST THING
+    }
+    public function vegetalDestroy() {
+      File::delete(public_path($this->pathVegetal));
+      return redirect()->route('excel.vegetal');
+    }
+    public function vegetalDelete(int $index) {
+      $rowIndex = $index; // Get the row index from the view
+      $templatePath = public_path($this->pathVegetal);
+  
+      if (!file_exists($templatePath)) {
+          return response()->json(['error' => 'Template not found'], 404);
+      }
+  
+      // Load the preformatted file
+      $reader = IOFactory::createReader('Xlsx');
+      $spreadsheet = $reader->load($templatePath);
+      $sheet = $spreadsheet->getActiveSheet();
+  
+      // Delete the specified row
+      $sheet->removeRow($rowIndex+1);
+  
+      // Save the updated file
+      $outputPath = public_path($this->pathVegetal);
+      $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+      $writer->save($outputPath);
+  
+      return redirect()->route('excel.vegetal');
     }
 }
