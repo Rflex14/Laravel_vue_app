@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\FormatoAlmacenesExport;
 use App\Exports\FormatoEpidemiologicoExport;
+use App\Exports\FormatoVegetalExport;
 use App\Imports\FormatoAlmacenesImport;
 use App\Imports\FormatoEpidemiologicoImport;
 use App\Imports\FormatoVegetalImport;
@@ -16,7 +17,8 @@ use App\Models\Tecnico;
 use App\Models\Vehiculo;
 use App\Http\Requests\ExcelDataAlmacenesRequest;
 use App\Http\Requests\ExcelDataEpidemiologicaRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\ExcelProteccionVegetalRequest;
+use Illuminate\HttpRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use DateTime;
 use Illuminate\Support\Facades\Storage;
@@ -79,7 +81,7 @@ class ExcelController extends Controller
       } else {
         Excel::import($tablas, public_path('formatos/Formato Data de Silos, Almacenes, Depósitos 2025.xlsx'));
       };
-      //Excel::import($tablas, public_path($request->archivo));
+      //Excel::import($tablas, public_path(request->archivo));
       foreach ($tablas->data as $fila) {
         if(!is_null($fila["tipo_evento"])) {          
           $index++;
@@ -87,7 +89,7 @@ class ExcelController extends Controller
       }
       $tablas->data[$index] = [
         'tipo_evento' => $request->tipo_evento,
-        '$request->tipo_evento_notificacion' => $request->$request->tipo_evento_notificacion,
+        'tipo_evento_notificacion' => $request->tipo_evento_notificacion,
         'fecha_notificacion' => $nuevaFechaNotificacion,
         'fecha_inspeccion' => $nuevaFechaInspeccion,
         'semana_epidemiologica' => $request->semana_epidemiologica,
@@ -178,7 +180,7 @@ class ExcelController extends Controller
     public function epidemiologicoStore(ExcelDataEpidemiologicaRequest $request) {
       $request->validated();
 
-      if ($request['tipo_lugar_inspeccion'] === 'unidad') {
+      if ($request->tipo_lugar_inspeccion === 'unidad') {
         $lugar = Unidad_Productiva::findOrFail($request['lugar_id']);
         $request['tipo_lugar_inspeccion'] = 'Unidad Productiva';
       } else if ($request['tipo_lugar_inspeccion'] === 'almacen') {
@@ -216,7 +218,7 @@ class ExcelController extends Controller
       } else {
         Excel::import($tablas, public_path('formatos/Formato Data Epidemiológica 2025.xlsx'));
       };
-      //Excel::import($tablas, public_path($request->archivo));
+      //Excel::import($tablas, public_path(request->archivo));
       foreach ($tablas->data as $fila) {
         if(!is_null($fila["tipo_evento"])) {          
           $index++;
@@ -225,8 +227,8 @@ class ExcelController extends Controller
 
 $tablas->data[$index] = [
       'tipo_evento' => $request->tipo_evento,
-      'registro_notificacion' => $request->registro_notificacion,
-      'registro_eventos_fitosanitarios' => $request->registro_eventos_fitosanitarios,
+      'semana_notificacion' => $request->semana_notificacion,
+      'semana_eventos_fitosanitarios' => $request->semana_eventos_fitosanitarios,
       'fecha_notificacion' => $nuevaFechaNotificacion,
       'dia' => $dia,
       'mes' => $mes,
@@ -309,7 +311,74 @@ $tablas->data[$index] = [
       return inertia('Excel/FormatoVegetal', props: ['unidades' => $unidades, 'tecnicos' => $tecnicos, 'tablas' => $datos]);
     }
     public function vegetalCreate() {
-      dd('sirve'); /////////////////////////////// LAST THING
+      $tecnicos = Tecnico::get();
+      $unidades = Unidad_Productiva::with('productos', 'persona', 'empresa')->get();
+      return inertia('Excel/FormatoVegetalCrear', props: ['unidades' => $unidades,'tecnicos' => $tecnicos]);
+    }
+    public function vegetalStore(ExcelProteccionVegetalRequest $request) {
+      $request->validated();
+
+      $unidad = Unidad_Productiva::with('persona', 'empresa')->findOrFail($request->unidad_id);
+      $producto = Producto::findOrFail($request->rubro_id);
+      $tecnico = Tecnico::find($request['tecnico_id']);
+
+      if (!is_Null($unidad['empresa_id'])) {
+        $propietario = Empresa::find($unidad['empresa_id']);
+        $nombreapellido = $propietario->nombre_responsable;
+        $cedula_riff = $propietario->rif;
+        $telefono = $propietario->telefono_responsable;
+      } else {
+        $propietario = Persona::find($unidad['persona_id']);
+        $nombreapellido = $propietario->nombre.' '.$propietario->apellido;
+        $cedula_riff = $propietario->cedula;
+        $telefono = $propietario->telefono;
+      }
+      
+      $fecha = DateTime::createFromFormat('Y-m-d', $request->fecha);
+      $nuevaFecha = $fecha->format('d/m/Y');
+
+      $index = 0;
+      $tablas = new FormatoVegetalImport;
+      if(file_exists(public_path($this->pathVegetal))) {
+        Excel::import($tablas, public_path($this->pathVegetal));
+      } else {
+        Excel::import($tablas, public_path('formatos/FORMATO PROTECCION VEGETAL_2025.xlsx'));
+      };
+      //Excel::import($tablas, public_path(request->archivo));
+      foreach ($tablas->data as $fila) {
+        if(!is_null($fila["semana"])) {          
+          $index++;
+        }
+      }
+
+    $tablas->data[$index] = [
+      'semana' => $request->semana,
+      'numero_acta' => $request->numero_acta,
+      'fecha' => $nuevaFecha,
+      'estado' => $unidad->estado,
+      'municipio' => $unidad->municipio,
+      'parroquia' => $unidad->parroquia,
+      'sector' => $unidad->sector,
+      'predio' => $unidad->nombre,
+      'rubro' => $producto->nombre,
+      'nombre_apellido_productor' => $nombreapellido,
+      'cedula_riff' => $cedula_riff,
+      'numero_telefono' => $telefono,
+      'hectareas_totales' => $request->hectareas_totales,
+      'hectareas_sembradas' => $request->hectareas_sembradas,
+      'hectareas_atendidas' => $request->hectareas_atendidas,
+      'hectareas_afectadas' => $request->hectareas_afectadas,
+      'plaga' => $request->plaga,
+      'medidas' => $request->medidas,
+      'observaciones' => $request->observaciones,
+      'tecnico_nombre' => $tecnico->nombre
+    ];
+  
+        $subset = $tablas->data;
+        $export = new FormatoVegetalExport($subset);
+        Excel::store($export, 'nombrerandom.xlsx');
+        
+        return redirect()->route('excel.vegetal');
     }
     public function vegetalDestroy() {
       File::delete(public_path($this->pathVegetal));
