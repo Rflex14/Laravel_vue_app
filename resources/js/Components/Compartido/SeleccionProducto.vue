@@ -62,15 +62,18 @@ const quitarSelection = (id) => {
 </script>
   
 <template>
-  <div>
+  <div class="w-full col-span-3">
     <InputLabel class="col-span-6" value="Productos"/>
-    <select id="productos" v-model="currentSelection">
-      <option v-for="(producto, index) in productos" :key="index" :value="producto">{{ producto?.nombre }}</option>
-    </select>
-    <SecondaryButton @click="agregarSelection">Agregar</SecondaryButton>
-    <div class="col-span-6">
+    <div class="flex">
+      <select id="productos" v-model="currentSelection" class="w-full">
+        <option v-for="(producto, index) in productos" :key="index" :value="producto">{{ producto?.nombre }}</option>
+      </select>
+      <button type="button" @click="agregarSelection" class="text-white bg-indigo-500 hover:bg-indigo-700 hover:text-white py-2 px-4 rounded ml-1">Agregar</button>
+    </div>
+    <div>
       <ul>
-        <li v-for="(producto, index) in selection" :key="index">{{ producto.nombre }} <span @click="quitarSelection(producto.id)">Eliminar</span>
+        <li v-for="(producto, index) in selection" :key="index" class="text-white bg-indigo-500 hover:bg-indigo-700 py-2 px-4 rounded mt-1 mb-1">
+          {{ producto.nombre }} <span @click="quitarSelection(producto.id)" class="float-end cursor-pointer">X</span>
         </li>
       </ul>
     </div>

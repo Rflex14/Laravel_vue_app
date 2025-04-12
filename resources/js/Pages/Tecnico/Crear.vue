@@ -18,7 +18,7 @@ const form = useForm ({
 </script>
 
 <template>
-  <AppLayout title="Crear Persona">
+  <AppLayout title="Crear Tecnico">
     <template #header>
       <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Crear Tecnico</h1>
     </template>

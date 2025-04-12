@@ -65,7 +65,7 @@ const eliminarFila = (index) => {
 </script>
 
 <template>
-    <AppLayout title="Dashboard"> 
+    <AppLayout title="Formato Almacenes"> 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
               Formato Data de Silos, Almacenes, Depósitos {{year}}

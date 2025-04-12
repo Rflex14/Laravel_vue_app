@@ -44,7 +44,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <AppLayout title="Editar Almacecn">
+  <AppLayout title="Editar Almacen">
     <template #header>
       <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Editar Almacen</h1>
     </template>
