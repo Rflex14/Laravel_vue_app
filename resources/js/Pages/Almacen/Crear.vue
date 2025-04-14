@@ -36,9 +36,9 @@ const form = useForm ({
 </script>
 
 <template>
-  <AppLayout title="Crear Almacen">
+  <AppLayout title="Registrar Almacén">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Crear Almacen</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Almacenes</h1>
     </template>
     <div class="py-12">
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">

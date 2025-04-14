@@ -91,10 +91,10 @@ const eliminarFila = (index) => {
             <div class="grid grid-cols-3 grid-rows-1 place-items-center w-full p-6 my-4 text-sm bg-white shadow-xl sm:rounded-lgp-4">
               <SecondaryButton>
                 <Link :href="route('excel.epidemiologicoCreate')">
-                  Registrar nueva inspeccion
+                  Registrar nueva inspección
                 </Link>
               </SecondaryButton>
-              <SecondaryButton @click="eliminarArchivo">Reiniciar archivo de Excel</SecondaryButton>
+              <SecondaryButton @click="eliminarArchivo">Reiniciar Archivo Excel</SecondaryButton>
               <SecondaryButton @click="descargar">Descargar Archivo Excel</SecondaryButton>
             </div>
           </div>
@@ -102,7 +102,7 @@ const eliminarFila = (index) => {
               <table v-if="tablas[6] !== null" class="w-full pt-2 pb-6 text-sm bg-white shadow-xl sm:rounded-lgp-4 border-separate border-spacing-x-12">
                 <thead>
                   <tr>
-                    <th>Tipo de Evento</th><th>Registro de Notificacion</th><th>Registro de Eventos Fitosanitarios</th><th>Fecha de Notificacion</th><th>Dia-Mes-Año</th><th>Semana Epidemiologica</th><th>Lugar Donde se Realizo la Inspeccion</th><th>Direccion de la Unidad Inspeccionada</th><th>Nombre de la Unidad Inspeccionada</th><th>Rubro o Producto</th><th>Nombre Comun de la Plaga</th><th>Nombre Cientifico de la Plaga</th><th>Porcentaje de Infestacion</th><th>Cantidad Inspeccionada</th><th>Unidad de Medida</th><th>Cant de Producto Afectado</th><th>Parte Afectada</th><th>Estado Fenologico del Cultivo</th><th>Nombre del Propietario</th><th>C.I o RIF del Propietario</th><th>Punto de Referencia</th><th>Laboratorio Donde se Envia la Muestra</th><th>Fecha de Envio al Laboratorio</th><th>Numero de Muestras Enviadas</th><th>Tecnico Responsable de la Inspeccion</th><th>Responsable de la Transcripcion</th><th>Eliminar Fila</th>
+                    <th>Tipo de Evento</th><th>Registro de Notificación</th><th>Registro de Eventos Fitosanitarios</th><th>Fecha de Notificación</th><th>Día Mes Año</th><th>Semana Epidemiológica</th><th>Lugar Donde se Realizó la Inspección</th><th>Dirección de la Unidad Inspeccionada</th><th>Nombre de la Unidad Inspeccionada</th><th>Rubro o Producto</th><th>Nombre Común de la Plaga</th><th>Nombre Científico de la Plaga</th><th>Porcentaje de Infestación</th><th>Cantidad Inspeccionada</th><th>Unidad de Medida</th><th>Cant de Producto Afectado</th><th>Parte Afectada</th><th>Estado Fenológico del Cultivo</th><th>Nombre del Propietario</th><th>C.I o RIF del Propietario</th><th>Punto de Referencia</th><th>Laboratorio Donde se Envía la Muestra</th><th>Fecha de Envío al Laboratorio</th><th>Número de Muestras Enviadas</th><th>Técnico Responsable de la Inspección</th><th>Responsable de la Transcripción</th><th>Eliminar Fila</th>
                   </tr>
                 </thead>
                 <tbody>  
@@ -186,7 +186,7 @@ const eliminarFila = (index) => {
                       {{ tabla.responsable_transcripcion }}
                     </td>
                     <td v-if="index >= 6 && tabla.tipo_evento !== null">
-                      <button @click="eliminarFila(index)" class="w-full items-center justify-center h-5/6 text-sm text-gray-900 font-bold px-3 py-2 my-1 bg-red-500 rounded border border-solid border-black">Borrar</button>
+                      <button @click="eliminarFila(index)" class="w-full items-center justify-center h-5/6 text-sm text-gray-900 font-bold px-3 py-2 my-1 rounded border border-solid border-black">Borrar</button>
                     </td>
                   </tr>
                 </tbody>

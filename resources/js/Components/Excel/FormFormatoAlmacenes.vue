@@ -41,10 +41,10 @@ defineEmits(['submit'])
 <template>
   <FormSection @submitted="$emit('submit')">
     <template #title>
-      Registrar Inspeccion de Silo, almacen o deposito
+      Registrar Inspección de Almacén en el Formato Data de Almacenes
     </template>
     <template #description>
-      Registrar una nueva inspeccion
+      Registrar una nueva inspección
     </template>
     <template #form>
       <div class="col-span-6 sm:col-span-6">
@@ -58,28 +58,28 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.tipo_evento" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="registro_notificacion" value="Registro de notificacion"
+        <InputLabel for="registro_notificacion" value="Registro de notificación"
           class=" " />
         <TextInput id="registro_notificacion" type="text" v-model:="form.registro_notificacion" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.registro_notificacion" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="fecha_notificacion" value="Fecha de notificacion"/>
+        <InputLabel for="fecha_notificacion" value="Fecha de notificación"/>
         <TextInput id="fecha_notificacion" type="date" v-model:="form.fecha_notificacion" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.fecha_notificacion" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="fecha_inspeccion" value="Fecha de inspeccion"/>
+        <InputLabel for="fecha_inspeccion" value="Fecha de inspección"/>
         <TextInput id="fecha_inspeccion" type="date" v-model:="form.fecha_inspeccion" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.fecha_inspeccion" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="semana_epidemiologica" value="Semana epidemiologica"/>
+        <InputLabel for="semana_epidemiologica" value="Semana epidemiológica"/>
         <TextInput id="semana_epidemiologica" type="number" v-model:="form.semana_epidemiologica" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.semana_epidemiologica" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="almacen_id" value="Lugar donde se realizo la inspeccion"/>
+        <InputLabel for="almacen_id" value="Lugar donde se realizó la inspección"/>
         <select name="almacen_id" id="almacen_id" v-model:="form.almacen_id" class="mt-1 block w-full">
           <option v-for="almacen in almacenes" :value="almacen.id">{{ almacen.nombre }}</option>
         </select>
@@ -137,7 +137,7 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.fitosanitario" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="fecha_proxima" value="Fecha de la proxima visita"/>
+        <InputLabel for="fecha_proxima" value="Fecha de la próxima visita"/>
         <TextInput id="fecha_proxima" type="date" v-model:="form.fecha_proxima" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.fecha_proxima" class="mt-2" />
       </div>
@@ -147,7 +147,7 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.observaciones" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="tecnico_id" value="Tecnico responsable de la inspeccion"/>
+        <InputLabel for="tecnico_id" value="Técnico responsable de la inspección"/>
         <select id="tecnico_id" v-model:="form.tecnico_id" class="mt-1 block w-full">
           <option v-for="tecnico in tecnicos" :value="tecnico.id">{{ tecnico.nombre }}</option>
         </select>

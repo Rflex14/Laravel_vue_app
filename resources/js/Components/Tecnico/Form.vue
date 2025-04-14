@@ -29,14 +29,14 @@ defineEmits(['submit'])
 <template>
   <FormSection @submitted="$emit('submit')">
     <template #title>
-      {{ updating ? 'Actualizar Tecnico' : 'Registrar Tecnico' }}
+      {{ updating ? 'Editar Técnico' : 'Registrar Técnico' }}
     </template>
     <template #description>
-      {{ updating ? 'Actualizar el tecnico seleccionado' : 'Registrar un tecnico nuevo' }}
+      {{ updating ? 'Editar el técnico seleccionado' : 'Registrar un técnico nuevo' }}
     </template>
     <template #form>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="cedula" value="Cedula" />
+        <InputLabel for="cedula" value="Cédula" />
         <TextInput id="cedula" v-model="form.cedula" type="number" autocomplete="cedula" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.cedula" class="mt-2" />
       </div>
@@ -51,7 +51,7 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.apellido" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="telefono" value="Telefono" />
+        <InputLabel for="telefono" value="Teléfono" />
         <TextInput id="telefono" v-model="form.telefono" type="number" autocomplete="telefono" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.telefono" class="mt-2" />
       </div>

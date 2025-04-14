@@ -25,6 +25,7 @@ class EmpresaRequest extends FormRequest
             'rif' => ['required', 'string', 'min:10','max:12', Rule::unique('empresas', 'rif')->ignore(request('empresa'), idColumn: 'id')],
             'nombre' => ['required', 'string', 'max:255'],
             'nombre_responsable' => ['required', 'string', 'max:255'],
+            'apellido_responsable' => ['required', 'string', 'max:255'],
             'cedula_responsable' => ['required', 'numeric', 'digits:8'],
             'telefono_responsable' => ['required', 'numeric', 'digits:11']
         ];

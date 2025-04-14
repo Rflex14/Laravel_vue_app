@@ -61,7 +61,7 @@ onBeforeMount(() => {
         <div class="p-6 bg-white border-b border-gray-200">
           <div class="flex justify-between">
             <Link :href="route('empresa.create')" class="mt-2">
-              Crear Empresa
+              Registrar una Empresa
             </Link>
             <div>
               <input
@@ -73,25 +73,37 @@ onBeforeMount(() => {
             </div>
           </div>
         </div>
-        <div class="mt-4">
-          <ul v-if="registers.length > 0" role="list" class="divide-y divide-gray-100">
+        <div v-if="registers.length> 0" class="mt-4">
+          <div class="w-full px-4 pb-3 border-solid border-b-2 border-gray-700">
+            <div class="w-full pl-4 grid grid-cols-7 grid-rows-2 place-content-evenly">
+              <p class="text-sm flex items-center font-semibold leading-6 text-gray-900 row-span-2">Rif</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Nombre empresa</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Nombre responsable</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Apellido responsable</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Cedula responsable</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Telefono responsable</p>
+                  <p class="w-full ml-16 text-sm flex items-center leading-6 text-gray-900 row-span-2">Acciones</p>
+                </div>
+            </div>
+          <ul v-if="registers.length > 0" role="list" class="pt-2 divide-y divide-gray-100">
             <li class="mb-2" v-for="empresa in registers"> 
-              <div class="w-full px-4 py-3 rounded-lg border-solid border-2 border-gray-900">
-                <div class="w-full pl-4 grid grid-cols-6 grid-rows-2 place-content-evenly">
+              <div class="w-full px-4 pb-3 border-solid border-b-2 border-gray-700">
+                <div class="w-full pl-4 grid grid-cols-7 grid-rows-2 place-content-evenly">
                   <p class="text-sm flex items-center font-semibold leading-6 text-gray-900 row-span-2">{{empresa.rif}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{empresa.nombre}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{empresa.nombre_responsable}}</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{empresa.apellido_responsable}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{empresa.cedula_responsable}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{empresa.telefono_responsable}}</p>
-                  <Link class="w-full flex items-center justify-center h-full mb-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" :href="route('empresa.edit', empresa.id)">EDITAR</Link>
-                  <button class="w-full flex items-center justify-center h-full mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(empresa.id)">BORRAR</button>
+                  <Link class="w-full flex items-center justify-center h-full mb-1 text-sm ml-3 text-gray-900 font-bold p-1 rounded border border-2 border-solid border-black" :href="route('empresa.edit', empresa.id)">EDITAR</Link>
+                  <button class="w-full flex items-center justify-center h-full mt-1 text-sm ml-3 text-gray-900 font-bold p-1 rounded border border-2 border-solid border-black" @click="deleteCategory(empresa.id)">BORRAR</button>
                 </div>
               </div>
             </li>
           </ul>
           <div v-else>
-            <div class="w-full px-4 py-3 rounded-lg border-solid border-2 border-gray-900">
-              <div class="w-full py-4 grid place-items-center text-xl">No se encontro ninguna empresa</div>
+            <div class="w-full px-4 py-3 border-solid border-y-2 border-gray-700">
+              <div class="w-full py-4 grid place-items-center text-xl">No se encontró ninguna empresa</div>
             </div>
           </div>
         </div>

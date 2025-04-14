@@ -13,28 +13,30 @@ class TecnicoSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 10; $i++) {
-          if ($i < 10) {
             Tecnico::create([
-              'cedula' => (10000001*$i),
-              'nombre' => 'nombre'.$i,
-              'apellido' => 'apellido'.$i,
-              'telefono' =>(10000000001*$i)
-            ]);
-          } else {
-            Tecnico::create([
-              'cedula' => 10000000,
-              'nombre' => 'nombre10',
-              'apellido' => 'apellido10',
-              'telefono' => 10000000000
+              'cedula' => (26658259),
+              'nombre' => 'Juan',
+              'apellido' => 'Román',
+              'telefono' =>4167877509
             ]);
             Tecnico::create([
-              'cedula' => 11000000,
-              'nombre' => 'nombre11',
-              'apellido' => 'apellido11',
-              'telefono' => 11000000000
+              'cedula' => (17584512),
+              'nombre' => 'Laura',
+              'apellido' => 'Prieto',
+              'telefono' =>4149949828
             ]);
-          }
+            Tecnico::create([
+              'cedula' => (18122923),
+              'nombre' => 'Natacha',
+              'apellido' => 'Gallegos',
+              'telefono' =>4242085000
+            ]);
+            Tecnico::create([
+              'cedula' => (32415645),
+              'nombre' => 'José',
+              'apellido' => 'Torres',
+              'telefono' =>4166766109
+            ]);
         }   
     }
-}
+

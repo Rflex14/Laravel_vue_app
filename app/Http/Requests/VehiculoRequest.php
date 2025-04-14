@@ -23,7 +23,7 @@ class VehiculoRequest extends FormRequest
     public function rules(): array
     {
       return [
-          'placa' => ['required', 'string', 'min:10', Rule::unique('vehiculos', 'placa')->ignore(request('vehiculo'), idColumn: 'id')],
+          'placa' => ['required', 'string', 'min:7', Rule::unique('vehiculos', 'placa')->ignore(request('vehiculo'), idColumn: 'id')],
           'modelo' => ['required', 'string', 'max:10'],
           'marca' => ['required', 'string', 'max:255'],
           'persona_id' => ['nullable'],

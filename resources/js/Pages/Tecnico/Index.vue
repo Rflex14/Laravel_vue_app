@@ -52,7 +52,7 @@ onBeforeMount(() => {
 <template>
   <AppLayout title="Tecnicos">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Tecnicos</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Técnicos</h1>
     </template>
 
     <div class="py-12 ">
@@ -60,7 +60,7 @@ onBeforeMount(() => {
         <div class="p-6 bg-white border-b border-gray-200">
           <div class="flex justify-between">
             <Link :href="route('tecnico.create')" class="mt-2">
-              Crear Tecnico
+              Registrar un Técnico
             </Link>
             <div>
               <input
@@ -72,24 +72,33 @@ onBeforeMount(() => {
             </div>
           </div>
         </div>
-        <div class="mt-4">
-          <ul v-if="registers.length > 0" role="list" class="divide-y divide-gray-100">
+        <div v-if="registers.length> 0" class="mt-4">
+          <div class="w-full px-4 pb-3 border-solid border-b-2 border-gray-700">
+            <div class="w-full pl-4 grid grid-cols-5 grid-rows-2 place-content-evenly">
+              <p class="text-sm flex items-center font-semibold leading-6 text-gray-900 row-span-2">Cedula</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Nombre</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Apellido</p>
+                  <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">Telefono</p>
+                  <p class="w-full ml-24 text-sm flex items-center leading-6 text-gray-900 row-span-2">Acciones</p>
+                </div>
+            </div>
+          <ul v-if="registers.length > 0" role="list" class="pt-2 divide-y divide-gray-100">
             <li class="mb-2" v-for="tecnico in registers"> 
-              <div class="w-full px-4 py-3 rounded-lg border-solid border-2 border-gray-900">
+              <div class="w-full px-4 pb-3 border-solid border-b-2 border-gray-700">
                 <div class="w-full pl-4 grid grid-cols-5 grid-rows-2 place-content-evenly">
                   <p class="text-sm flex items-center font-semibold leading-6 text-gray-900 row-span-2">{{tecnico.cedula}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{tecnico.nombre}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{tecnico.apellido}}</p>
                   <p class="text-sm flex items-center leading-6 text-gray-900 row-span-2">{{tecnico.telefono}}</p>
-                  <Link class="w-full flex items-center justify-center h-full mb-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" :href="route('tecnico.edit', tecnico.id)">EDITAR</Link>
-                  <button class="w-full flex items-center justify-center h-full mt-1 text-sm ml-3 text-gray-900 font-bold p-1 bg-red-500 rounded border border-solid border-black" @click="deleteCategory(tecnico.id)">BORRAR</button>
+                  <Link class="w-full flex items-center justify-center h-full mb-1 text-sm ml-3 text-gray-900 font-bold p-1 rounded border border-2 border-solid border-black" :href="route('tecnico.edit', tecnico.id)">EDITAR</Link>
+                  <button class="w-full flex items-center justify-center h-full mt-1 text-sm ml-3 text-gray-900 font-bold p-1 rounded border border-2 border-solid border-black" @click="deleteCategory(tecnico.id)">BORRAR</button>
                 </div>
               </div>
             </li>
           </ul>
           <div v-else>
-            <div class="w-full px-4 py-3 rounded-lg border-solid border-2 border-gray-900">
-              <div class="w-full py-4 grid place-items-center text-xl">No se encontro ningun tecnico</div>
+            <div class="w-full px-4 py-3 border-solid border-y-2 border-gray-700">
+              <div class="w-full py-4 grid place-items-center text-xl">No se encontró ningún técnico</div>
             </div>
           </div>
         </div>

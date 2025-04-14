@@ -13,31 +13,48 @@ class PersonaSeeder extends Seeder
      */
     public function run(): void
     {
-      for ($i = 1; $i <= 10; $i++) {
-        if ($i < 10) {
           Persona::create([
-            'rif' => 'V-'.(10000001*$i).'-'.$i,
-            'cedula' => (10000001*$i),
-            'nombre' => 'nombre'.$i,
-            'apellido' => 'apellido'.$i,
-            'telefono' =>(10000000001*$i)
-          ]);
-        } else {
-          Persona::create([
-            'rif' => 'V-10000000-0',
-            'cedula' => 10000000,
-            'nombre' => 'nombre10',
-            'apellido' => 'apellido10',
-            'telefono' => 10000000000
+            'rif' => 'V-'.(19668100).'-1',
+            'cedula' => (19668100),
+            'nombre' => 'Servio',
+            'apellido' => 'Merino ',
+            'telefono' =>(4240782794)
           ]);
           Persona::create([
-            'rif' => 'V-11000000-0',
-            'cedula' => 11000000,
-            'nombre' => 'nombre11',
-            'apellido' => 'apellido11',
-            'telefono' => 11000000000
+            'rif' => 'V-'.(16727975).'-2',
+            'cedula' => (16727975),
+            'nombre' => 'Emil',
+            'apellido' => 'Medina ',
+            'telefono' =>(4163791384)
           ]);
-        }
+          Persona::create([
+            'rif' => 'V-'.(26556381).'-3',
+            'cedula' => (26556381),
+            'nombre' => 'Osmán',
+            'apellido' => 'Rolón',
+            'telefono' =>(4248073990)
+          ]);
+          Persona::create([
+            'rif' => 'V-'.(57293333).'-4',
+            'cedula' => (57293333),
+            'nombre' => 'Hugo',
+            'apellido' => 'Rodrígez',
+            'telefono' =>(4146773110)
+          ]);
+          Persona::create([
+            'rif' => 'V-'.(33000097).'-5',
+            'cedula' => (33000097),
+            'nombre' => 'Valeria',
+            'apellido' => 'Rivero',
+            'telefono' =>(4243299046)
+          ]);   
+          Persona::create([
+            'rif' => 'V-'.(29944285).'-6',
+            'cedula' => (29944285),
+            'nombre' => 'Geremías ',
+            'apellido' => 'Brito',
+            'telefono' =>(4164867994)
+          ]);          
       }   
     }
-}
+

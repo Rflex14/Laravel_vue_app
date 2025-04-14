@@ -19,9 +19,9 @@ const form = useForm ({
 </script>
 
 <template>
-  <AppLayout title="Crear Persona">
+  <AppLayout title="Registrar Persona">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Crear Persona</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Personas</h1>
     </template>
     <div class="py-12">
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">

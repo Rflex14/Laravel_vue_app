@@ -35,9 +35,9 @@ const form = useForm ({
 </script>
 
 <template>
-  <AppLayout title="Editar Vehiculo">
+  <AppLayout title="Editar Vehículo">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Editar Vehiculo</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Vehículos</h1>
     </template>
     <div class="py-12">
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">

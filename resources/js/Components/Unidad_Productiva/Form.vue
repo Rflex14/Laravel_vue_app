@@ -50,10 +50,10 @@ defineEmits(['submit'])
 <template>
   <FormSection @submitted="$emit('submit')">
     <template #title>
-      {{ updating ? 'Actualizar Unidad Productiva' : 'Registrar Unidad Productiva' }}
+      {{ updating ? 'Editar Unidad Productiva' : 'Registrar Unidad Productiva' }}
     </template>
     <template #description>
-      {{ updating ? 'Actualizar la Unidad Productiva seleccionada' : 'Registrar una Unidad Productiva nueva' }}
+      {{ updating ? 'Editar la Unidad Productiva seleccionada' : 'Registrar una Unidad Productiva nueva' }}
     </template>
     <template #form>
       <div class="col-span-6 sm:col-span-6">
@@ -82,17 +82,17 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.sector" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="direccion" value="Direccion" />
+        <InputLabel for="direccion" value="Dirección" />
         <TextInput id="direccion" v-model="form.direccion" type="text" autocomplete="direccion" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.direccion" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="hectareasActivas" value="Hectareas Activas" />
+        <InputLabel for="hectareasActivas" value="Hectáreas Activas" />
         <TextInput id="hectareasActivas" v-model="form.hectareasActivas" type="number" autocomplete="hectareasActivas" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.hectareasActivas" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="hectareasInactivas" value="Hectareas Inactivas" />
+        <InputLabel for="hectareasInactivas" value="Hectáreas Inactivas" />
         <TextInput id="hectareasInactivas" v-model="form.hectareasInactivas" type="number" autocomplete="hectareasInactivas" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.hectareasInactivas" class="mt-2" />
       </div>

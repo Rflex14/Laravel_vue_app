@@ -21,6 +21,7 @@ const form = useForm ({
   rif: props.empresa.rif,
   nombre: props.empresa.nombre,
   nombre_responsable: props.empresa.nombre_responsable,
+  apellido_responsable: props.empresa.apellido_responsable,
   cedula_responsable: props.empresa.cedula_responsable,
   telefono_responsable: props.empresa.telefono_responsable
 })
@@ -29,7 +30,7 @@ const form = useForm ({
 <template>
   <AppLayout title="Editar Empresa">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Editar Empresa</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Empresas</h1>
     </template>
     <div class="py-12">
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">

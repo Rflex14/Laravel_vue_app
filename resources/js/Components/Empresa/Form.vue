@@ -29,10 +29,10 @@ defineEmits(['submit'])
 <template>
   <FormSection @submitted="$emit('submit')">
     <template #title>
-      {{ updating ? 'Actualizar Empresa' : 'Registrar Empresa' }}
+      {{ updating ? 'Editar Empresa' : 'Registrar Empresa' }}
     </template>
     <template #description>
-      {{ updating ? 'Actualizar la empresa seleccionada' : 'Registrar una empresa nueva' }}
+      {{ updating ? 'Editar la empresa seleccionada' : 'Registrar una empresa nueva' }}
     </template>
     <template #form>
       <div class="col-span-6 sm:col-span-6">
@@ -51,12 +51,17 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.nombre_responsable" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="cedula_responsable" value="Cedula del responsable" />
+        <InputLabel for="apellido_responsable" value="Apellido del responsable" />
+        <TextInput id="apellido_responsable" v-model="form.apellido_responsable" type="text" autocomplete="apellido_responsable" class="mt-1 block w-full" />
+        <InputError :message="$page.props.errors.apellido_responsable" class="mt-2" />
+      </div>
+      <div class="col-span-6 sm:col-span-6">
+        <InputLabel for="cedula_responsable" value="Cédula del responsable" />
         <TextInput id="cedula_responsable" v-model="form.cedula_responsable" type="number" autocomplete="cedula_responsable" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.cedula_responsable" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="telefono_responsable" value="Telefono del responsable" />
+        <InputLabel for="telefono_responsable" value="Teléfono del responsable" />
         <TextInput id="telefono_responsable" v-model="form.telefono_responsable" type="number" autocomplete="telefono_responsable" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.telefono_responsable" class="mt-2" />
       </div>

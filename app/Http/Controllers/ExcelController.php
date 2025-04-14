@@ -87,9 +87,10 @@ class ExcelController extends Controller
           $index++;
         }
       }
+      
       $tablas->data[$index] = [
         'tipo_evento' => $request->tipo_evento,
-        'tipo_evento_notificacion' => $request->tipo_evento_notificacion,
+        'registro_notificacion' => $request->registro_notificacion,
         'fecha_notificacion' => $nuevaFechaNotificacion,
         'fecha_inspeccion' => $nuevaFechaInspeccion,
         'semana_epidemiologica' => $request->semana_epidemiologica,
@@ -227,8 +228,8 @@ class ExcelController extends Controller
 
 $tablas->data[$index] = [
       'tipo_evento' => $request->tipo_evento,
-      'semana_notificacion' => $request->semana_notificacion,
-      'semana_eventos_fitosanitarios' => $request->semana_eventos_fitosanitarios,
+      'registro_notificacion' => $request->registro_notificacion,
+      'registro_eventos_fitosanitarios' => $request->registro_eventos_fitosanitarios,
       'fecha_notificacion' => $nuevaFechaNotificacion,
       'dia' => $dia,
       'mes' => $mes,
@@ -324,7 +325,7 @@ $tablas->data[$index] = [
 
       if (!is_Null($unidad['empresa_id'])) {
         $propietario = Empresa::find($unidad['empresa_id']);
-        $nombreapellido = $propietario->nombre_responsable;
+        $nombreapellido = $propietario->nombre_responsable.' '.$propietario->apellido_responsable;
         $cedula_riff = $propietario->rif;
         $telefono = $propietario->telefono_responsable;
       } else {

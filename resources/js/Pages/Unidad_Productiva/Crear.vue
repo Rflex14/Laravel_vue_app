@@ -43,9 +43,9 @@ const form = useForm ({
 </script>
 
 <template>
-  <AppLayout title="Crear Unidad Productiva">
+  <AppLayout title="Registrar Unidad Productiva">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Crear Unidad Productiva</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Unidades Productivas</h1>
     </template>
     <div class="py-12">
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">

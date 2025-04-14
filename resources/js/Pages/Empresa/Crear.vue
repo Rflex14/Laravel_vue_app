@@ -13,15 +13,16 @@ const form = useForm ({
   rif: '',
   nombre: '',
   nombre_responsable: '',
+  apellido_responsable: '',
   cedula_responsable: '',
   telefono_responsable: ''
 })
 </script>
 
 <template>
-  <AppLayout title="Crear Empresa">
+  <AppLayout title="Registrar Empresa">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Crear Empresa</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Empresas</h1>
     </template>
     <div class="py-12">
       <div class="max-2-7xl mx-auto sm:px-6 lg:px-8">

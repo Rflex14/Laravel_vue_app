@@ -46,10 +46,10 @@ defineEmits(['submit'])
 <template>
   <FormSection @submitted="$emit('submit')">
     <template #title>
-      {{ updating ? 'Actualizar Almacen' : 'Registrar Almacen' }}
+      {{ updating ? 'Editar Almacén' : 'Registrar Almacén' }}
     </template>
     <template #description>
-      {{ updating ? 'Actualizar el Almacen seleccionado' : 'Registrar un Almacen nuevo' }}
+      {{ updating ? 'Editar el Almacén seleccionado' : 'Registrar un Almacén nuevo' }}
     </template>
     <template #form>
       <div class="col-span-6 sm:col-span-6">
@@ -78,17 +78,17 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.sector" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="direccion" value="Direccion" />
+        <InputLabel for="direccion" value="Dirección" />
         <TextInput id="direccion" v-model="form.direccion" type="text" autocomplete="direccion" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.direccion" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="cantidadMaxima" value="Cantidad Maxima" />
+        <InputLabel for="cantidadMaxima" value="Cantidad Máxima" />
         <TextInput id="cantidadMaxima" v-model="form.cantidadMaxima" type="number" autocomplete="cantidadMaxima" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.cantidadMaxima" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="unidad" value="Unidad de medicion" />
+        <InputLabel for="unidad" value="Unidad de medición" />
         <TextInput id="Unidad" v-model="form.unidad" type="text" autocomplete="unidad" class="mt-1 block w-full" />
         <InputError :message="$page.props.errors.unidad" class="mt-2" />
       </div>

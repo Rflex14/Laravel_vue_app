@@ -155,13 +155,13 @@ const logout = () => {
 
                                     <template #content>
                                         <!-- Account Management -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
+                                        <!--<div class="block px-4 py-2 text-xs text-gray-400">
                                             Cuenta
                                         </div>
                                         <div class="block px-4 py-2 text-sm text-gray-700">
                                           Perfil
                                         </div>
-
+                                        -->
                                         <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
                                             API Tokens
                                         </DropdownLink>

@@ -13,31 +13,30 @@ class EmpresaSeeder extends Seeder
      */
     public function run(): void
     {
-      for ($i = 1; $i <= 10; $i++) {
-        if ($i < 10) {
           Empresa::create([
-            'rif' => 'J-'.(10000001*$i).'-'.$i,
-            'nombre' => 'nombre'.$i,
-            'nombre_responsable' => 'nombre_responsable'.$i,
-            'cedula_responsable' => (10000001*$i),
-            'telefono_responsable' =>(10000000001*$i)
-          ]);
-        } else {
-          Empresa::create([
-            'rif' => 'J-10000000-0',
-            'nombre' => 'nombre10',
-            'nombre_responsable' => 'nombre_responsable10',
-            'cedula_responsable' => 10000000,
-            'telefono_responsable' => 10000000000
+            'rif' => 'J-'.(25150701).'-1',
+            'nombre' => 'Agrinova',
+            'nombre_responsable' => 'Jacinto',
+            'apellido_responsable'=> 'Colón',
+            'cedula_responsable' => (32415645),
+            'telefono_responsable' =>(4246766109)
           ]);
           Empresa::create([
-            'rif' => 'J-11000000-0',
-            'nombre' => 'nombre11',
-            'nombre_responsable' => 'nombre_responsable11',
-            'cedula_responsable' => 11000000,  
-            'telefono_responsable' => 11000000000
+            'rif' => 'J-'.(33755279).'-2',
+            'nombre' => 'Agrosilca',
+            'nombre_responsable' => 'Vivian',
+            'apellido_responsable'=> 'Montano',
+            'cedula_responsable' => (14869752),
+            'telefono_responsable' =>(4167348046)
           ]);
-        }
+          Empresa::create([
+            'rif' => 'J-'.(12952072).'-3',
+            'nombre' => 'Agrogan Oriente',
+            'nombre_responsable' => 'Javier',
+            'apellido_responsable'=> 'Ortiz',
+            'cedula_responsable' => (23004072),
+            'telefono_responsable' =>(4149798833)
+          ]);
       }
     }
-}
+

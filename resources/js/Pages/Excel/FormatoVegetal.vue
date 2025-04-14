@@ -75,10 +75,10 @@ const eliminarFila = (index) => {
             <div class="grid grid-cols-3 grid-rows-1 place-items-center w-full p-6 my-4 text-sm bg-white shadow-xl sm:rounded-lgp-4">
               <SecondaryButton>
                 <Link :href="route('excel.vegetalCreate')">
-                  Registrar nueva inspeccion
+                  Registrar nueva inspección
                 </Link>
               </SecondaryButton>
-              <SecondaryButton @click="eliminarArchivo">Reiniciar archivo de Excel</SecondaryButton>
+              <SecondaryButton @click="eliminarArchivo">Reiniciar Archivo Excel</SecondaryButton>
               <SecondaryButton @click="descargar">Descargar Archivo Excel</SecondaryButton>
             </div>
           </div>
@@ -86,7 +86,7 @@ const eliminarFila = (index) => {
               <table v-if="tablas[5] !== null" class="w-full pt-2 pb-6 text-sm bg-white shadow-xl sm:rounded-lgp-4 border-separate border-spacing-x-12">
                 <thead>
                   <tr>
-                    <th>Semana</th><th>Numero de acta</th><th>Fecha</th><th>Estado</th><th>Municipio</th><th>Parroquia</th><th>Sector</th><th>Predio</th><th>Rubro o Producto</th><th>Nombre y Apellido del Productor</th><th>Cedula o Riff</th><th>Numero de Telefono</th><th>Hectareas Totales</th><th>Hectareas Sembradas</th><th>Hectareas Atendidas</th><th>Hectareas Afectadas</th><th>Plaga o Enfermedad</th><th>Observaciones</th><th>Tecnico Responsable de la Inspeccion</th><th>Eliminar Fila</th>
+                    <th>Semana</th><th>Número de acta</th><th>Fecha</th><th>Estado</th><th>Municipio</th><th>Parroquia</th><th>Sector</th><th>Predio</th><th>Rubro o Producto</th><th>Nombre del Productor</th><th>Cédula o Riff</th><th>Número de Telefono</th><th>Hectáreas Totales</th><th>Hectáreas Sembradas</th><th>Hectáreas Atendidas</th><th>Hectáreas Afectadas</th><th>Plaga o Enfermedad</th><th>Observaciones</th><th>Técnico Responsable de la Inspección</th><th>Eliminar Fila</th>
                   </tr>
                 </thead>
                 <tbody>  
@@ -149,7 +149,7 @@ const eliminarFila = (index) => {
                       {{ tabla.tecnico_nombre }}
                     </td>
                     <td v-if="index >= 5 && tabla.semana !== null">
-                      <button @click="eliminarFila(index)" class="w-full items-center justify-center h-5/6 text-sm text-gray-900 font-bold px-3 py-2 my-1 bg-red-500 rounded border border-solid border-black">Borrar</button>
+                      <button @click="eliminarFila(index)" class="w-full items-center justify-center h-5/6 text-sm text-gray-900 font-bold px-3 py-2 my-1 rounded border border-solid border-black">Borrar</button>
                     </td>
                   </tr>
                 </tbody>

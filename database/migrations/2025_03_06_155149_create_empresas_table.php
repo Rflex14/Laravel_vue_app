@@ -16,6 +16,7 @@ return new class extends Migration
           $table->string('rif');
           $table->string('nombre');
           $table->string('nombre_responsable');
+          $table->string('apellido_responsable');
           $table->integer('cedula_responsable');
           $table->BigInteger('telefono_responsable');
           $table->timestamps();

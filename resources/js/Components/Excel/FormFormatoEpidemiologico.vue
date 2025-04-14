@@ -101,10 +101,10 @@ defineEmits(['submit'])
 <template>
   <FormSection @submitted="$emit('submit')">
     <template #title>
-      Registro Data Epidemiologica
+      Registrar una Inspección en el Formato Data Epidemiológica
     </template>
     <template #description>
-      Registrar una nueva inspeccion
+      Registrar una nueva inspección
     </template>
     <template #form>
       <div class="col-span-6 sm:col-span-6">
@@ -118,7 +118,7 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.tipo_evento" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="registro_notificacion" value="Registro de notificacion"/>
+        <InputLabel for="registro_notificacion" value="Registro de notificación"/>
         <TextInput id="registro_notificacion" type="text" v-model="form.registro_notificacion" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.registro_notificacion" class="mt-2" />
       </div>
@@ -128,26 +128,26 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.registro_eventos_fitosanitarios" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="fecha_notificacion" value="Fecha de notificacion"/>
+        <InputLabel for="fecha_notificacion" value="Fecha de notificación"/>
         <TextInput id="fecha_notificacion" type="date" v-model="form.fecha_notificacion" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.fecha_notificacion" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="año_mes_dia" value="Año_Mes_Dia"/>
+        <InputLabel for="año_mes_dia" value="Año_Mes_Día"/>
         <TextInput id="año_mes_dia" type="date" v-model="form.año_mes_dia" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.año_mes_dia" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="semana_epidemiologica" value="Semana epidemiologica"/>
+        <InputLabel for="semana_epidemiologica" value="Semana epidemiológica"/>
         <TextInput id="semana_epidemiologica" type="number" v-model="form.semana_epidemiologica" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.semana_epidemiologica" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="tipo_lugar" value="Tipo de lugar donde se realizo la inspeccion"/>
+        <InputLabel for="tipo_lugar" value="Tipo de lugar donde se realizó la inspección"/>
         <select v-on:change="reiniciarTipo" name="tipo_lugar" id="tipo_lugar" v-model="tipo_lugar" class="mt-1 block w-full">
           <option value="unidad">Unidad Productiva</option>
-          <option value="almacen">Almacen</option>
-          <option value="vehiculo">Vehiculo</option>
+          <option value="almacen">Almacén</option>
+          <option value="vehiculo">Vehículo</option>
         </select>
         <InputError :message="$page.props.errors.tipo_lugar_inspeccion" class="mt-2" />
       </div>
@@ -161,7 +161,7 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.lugar_id" class="mt-2" />
       </div>
       <div v-if="tipo_lugar !== '' && tipo_lugar === 'almacen'" class="col-span-6 sm:col-span-6">
-        <InputLabel for="almacen_id" value="Almacen inspeccionado"/>
+        <InputLabel for="almacen_id" value="Almacén inspeccionado"/>
         <select name="almacen_id" id="almacen_id" v-model="form.lugar_id" class="mt-1 block w-full">
           <option v-if="almacenes.length === 0" disabled>No hay almacenes disponibles</option>
           <option v-for="almacen in almacenes" :value="almacen.id">{{ almacen.nombre }}</option>
@@ -169,7 +169,7 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.lugar_id" class="mt-2" />
       </div>
       <div v-if="tipo_lugar !== '' && tipo_lugar === 'vehiculo'" class="col-span-6 sm:col-span-6">
-        <InputLabel for="vehiculo_id" value="Vehiculo inspeccionado"/>
+        <InputLabel for="vehiculo_id" value="Vehículo inspeccionado"/>
         <select name="vehiculo_id" id="vehiculo_id" v-model="form.lugar_id" class="mt-1 block w-full">
           <option v-if="vehiculos.length === 0" disabled>No hay vehiculos disponibles</option>
           <option v-for="vehiculo in vehiculos" :value="vehiculo.id">{{ vehiculo.placa + ' - ' + vehiculo.marca}}</option>
@@ -193,17 +193,17 @@ defineEmits(['submit'])
       </div>
 
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="plaga_nombre_comun" value="Nombre comun de plaga"/>
+        <InputLabel for="plaga_nombre_comun" value="Nombre común de plaga"/>
         <TextInput id="plaga_nombre_comun" type="text" v-model="form.plaga_nombre_comun" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.plaga_nombre_comun" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="plaga_nombre_cientifico" value="Nombre cientifico de plaga"/>
+        <InputLabel for="plaga_nombre_cientifico" value="Nombre científico de plaga"/>
         <TextInput id="plaga_nombre_cientifico" type="text" v-model="form.plaga_nombre_cientifico" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.plaga_nombre_cientifico" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="porcentaje_infestacion" value="Porcentaje de infestacion"/>
+        <InputLabel for="porcentaje_infestacion" value="Porcentaje de infestación"/>
         <TextInput id="porcentaje_infestacion" type="number" v-model="form.porcentaje_infestacion" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.porcentaje_infestacion" class="mt-2" />
       </div>
@@ -228,7 +228,7 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.parte_afectada" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="estado_fenologico" value="Estado fenologico del cultivo"/>
+        <InputLabel for="estado_fenologico" value="Estado fenológico del cultivo"/>
         <TextInput id="estado_fenologico" type="text" v-model="form.estado_fenologico" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.estado_fenologico" class="mt-2" />
       </div>
@@ -238,17 +238,17 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.punto_referencia" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="nombre_laboratorio" value="Laboratorio donde se envia la muestra"/>
+        <InputLabel for="nombre_laboratorio" value="Laboratorio donde se envía la muestra"/>
         <TextInput id="nombre_laboratorio" type="text" v-model="form.nombre_laboratorio" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.nombre_laboratorio" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="fecha_envio" value="Fecha de envio"/>
+        <InputLabel for="fecha_envio" value="Fecha de envío"/>
         <TextInput id="fecha_envio" type="date" v-model="form.fecha_envio" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.fecha_envio" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="numero_muestras_enviadas" value="Numero de muestras enviadas"/>
+        <InputLabel for="numero_muestras_enviadas" value="Número de muestras enviadas"/>
         <TextInput id="numero_muestras_enviadas" type="number" v-model="form.numero_muestras_enviadas" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.numero_muestras_enviadas" class="mt-2" />
       </div>
@@ -258,14 +258,14 @@ defineEmits(['submit'])
         <InputError :message="$page.props.errors.observaciones" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="tecnico_id" value="Tecnico responsable de la inspeccion"/>
+        <InputLabel for="tecnico_id" value="Técnico responsable de la inspección"/>
         <select id="tecnico_id" v-model="form.tecnico_id" class="mt-1 block w-full">
           <option v-for="tecnico in tecnicos" :value="tecnico.id">{{ tecnico.nombre }}</option>
         </select>
         <InputError :message="$page.props.errors.tecnico_id" class="mt-2" />
       </div>
       <div class="col-span-6 sm:col-span-6">
-        <InputLabel for="responsable_transcripcion" value="Responsable de la transcripcion"/>
+        <InputLabel for="responsable_transcripcion" value="Responsable de la transcripción"/>
         <TextInput id="responsable_transcripcion" type="text" v-model="form.responsable_transcripcion" class="mt-1 block w-full"/>
         <InputError :message="$page.props.errors.responsable_transcripcion" class="mt-2" />
       </div>
