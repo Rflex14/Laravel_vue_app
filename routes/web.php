@@ -11,6 +11,7 @@ use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\AlmacenProductoController;
 use App\Http\Controllers\UnidadProductivaProductoController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\RespaldoController;
 use App\Http\Controllers\DescargaController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
   Route::post('/excel/vegetalStore', [ExcelController::class, 'vegetalStore'])->name('excel.vegetalStore');
   Route::get('/excel/vegetalDestroy', [ExcelController::class, 'vegetalDestroy'])->name('excel.vegetalDestroy');
   Route::delete('/excel/vegetalDelete/{index}', [ExcelController::class, 'vegetalDelete'])->name('excel.vegetalDelete');
+  Route::get('/respaldo/formatoAlmacenes', [RespaldoController::class, 'formatoAlmacenes'])->name('respaldo.formatoAlmacenes');
+  Route::get('/respaldo/formatoEpidemiologico', [RespaldoController::class, 'formatoEpidemiologico'])->name('respaldo.formatoEpidemiologico');
+  Route::get('/respaldo/formatoVegetal', [RespaldoController::class, 'formatoVegetal'])->name('respaldo.formatoVegetal');
   Route::get('/descarga/formatoAlmacenes', [DescargaController::class, 'formatoAlmacenes'])->name('descarga.formatoAlmacenes');
   Route::get('/descarga/formatoEpidemiologico', [DescargaController::class, 'formatoEpidemiologico'])->name('descarga.formatoEpidemiologico');
   Route::get('/descarga/formatoVegetal', [DescargaController::class, 'formatoVegetal'])->name('descarga.formatoVegetal');
+  Route::get('/descarga/respaldoAlmacenes/{file}', [DescargaController::class, 'respaldoAlmacenes'])->name('descarga.respaldoAlmacenes');
+  Route::get('/descarga/respaldoEpidemiologico/{file}', [DescargaController::class, 'respaldoEpidemiologico'])->name('descarga.respaldoEpidemiologico');
+  Route::get('/descarga/respaldoVegetal/{file}', [DescargaController::class, 'respaldoVegetal'])->name('descarga.respaldoVegetal');
 });

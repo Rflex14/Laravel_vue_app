@@ -52,4 +52,16 @@ class DescargaController extends Controller
         return response()->download($archivo);
       }
     }
+    public function respaldoAlmacenes($file) {
+      $path = public_path('backup/formatoAlmacenes/'.$file);
+      return response()->download($path);
+    }
+    public function respaldoEpidemiologico($file) {
+      $path = public_path('backup/Formato Data Epidemiológica/'.$file);
+      return response()->download($path);
+    }
+    public function respaldoVegetal($file) {
+      $path = public_path('backup/FORMATO PROTECCION VEGETAL/'.$file);
+      return response()->download($path);
+    }
 }
