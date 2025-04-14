@@ -36,7 +36,7 @@ const Descargar = (archivo) => {
 <template>
   <AppLayout title="Respaldos">
     <template #header>
-      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Respaldos formato epidemiologico</h1>
+      <h1 class="font-semibold text-xl -text-gray-800 leading-tight">Respaldos formato epidemiológico</h1>
     </template>
 
     <div class="py-12 ">        
